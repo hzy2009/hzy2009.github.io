@@ -5,7 +5,9 @@
 yarn.lock
 package-lock.json
 node_modules/
-
+.github/
+docs/
+.travis.yml
 # Ignore optional external libraries
 source/lib/*
 
