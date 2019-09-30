@@ -55,28 +55,36 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jimmy&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="需求分析在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。     对于各">
+<meta name="keywords" content="发号机 乐观锁 策略模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写一个规则可配置的高并发的发号机">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/手写一个永不重复的发号机/index.html">
 <meta property="og:site_name" content="jimmy&#39;s blog">
+<meta property="og:description" content="需求分析在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。     对于各">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/svg/yqnnJyrBBKeioIzopiyhAShFoKajKiZNrLNmHCYu9IO3oKekJ245aBhW4g1GQdgbrTEEsKztxq9MXcGcYieN6vgVJrd1nQMWW2IgO5C3j3SuBx_SBISnEnKkZ4sLOsb9lcTUSb5gRcfU2OfAx39WJIv0DgQK0W00">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/svg/TP3D2e9058NtFeKlq0kuw5sYNBGDQLrM89bAP48gKf0KGJ-kPjAYbvaxCwrwXHGZjP_DvN3ldFCDXs0NnYlg6-aKQtKHh2bOYFgnbAfxhm_6d1e75YKGw8_BX1yHZLHk8h2S_9I-5XfDfTrjA7BX5jug2-MR8MWBjdVOF0GKWgbAT7dEp1_fUUu8aUkCkSFyMZOBpOwSSIgxx_HFvWzQZgAQ0ve7ILn62Vy_B_7JWDdR2hBQ6h_Pu0K4wmJt2DvbWBMRYgAiQZefzVyoCmz3R1U6bloZtoS0">
+<meta property="og:updated_time" content="2019-09-30T08:49:17.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jimmy&#39;s blog">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="手写一个规则可配置的高并发的发号机">
+<meta name="twitter:description" content="需求分析在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。     对于各">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/svg/yqnnJyrBBKeioIzopiyhAShFoKajKiZNrLNmHCYu9IO3oKekJ245aBhW4g1GQdgbrTEEsKztxq9MXcGcYieN6vgVJrd1nQMWW2IgO5C3j3SuBx_SBISnEnKkZ4sLOsb9lcTUSb5gRcfU2OfAx39WJIv0DgQK0W00">
+  <link rel="canonical" href="http://yoursite.com/2019/09/26/手写一个永不重复的发号机/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>jimmy's blog</title>
+  <title>手写一个规则可配置的高并发的发号机 | jimmy's blog</title>
   
 
 
@@ -184,93 +192,13 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jimmy Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/30/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-30 08:49:17" itemprop="dateCreated datePublished" datetime="2019-09-30T08:49:17+00:00">2019-09-30</time>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/手写一个永不重复的发号机/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -283,9 +211,8 @@
       <meta itemprop="name" content="jimmy's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/26/手写一个永不重复的发号机/" class="post-title-link" itemprop="url">手写一个规则可配置的高并发的发号机</a>
+        <h1 class="post-title" itemprop="name headline">手写一个规则可配置的高并发的发号机
+
           
         </h1>
 
@@ -327,7 +254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。    </p>
+        <h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。    </p>
 <p>对于各种单据号的生成，其实很多是很类似的，我们需要写一个通用发号机功能，并作为一个公共服务开放出来，可以支持各种发号的规则，同时支持高并发的情况。</p>
 <h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><p>目前需求有3个关键的点:  </p>
 <ol>
@@ -493,243 +420,56 @@
 <p>当我们是用redis的INCR命令的时候，其实可以拓展做很多事情，例如做并发的控制，现在很多电商做抢购的控制，就是通过redis 的INCR命令控制。每当接受自动INCR增加，当增加的请求数超过库存就直接返回不在处理请求。  </p>
 <p>或者通过redis的INCR做系统的幂等性控制，通过userId + 操作类型 作为key，通过过期时间，控制某些操作不能在限定的时间范围内重复操作。  </p>
 
-        
-      
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/发号机-乐观锁-策略模式/" rel="tag"># 发号机 乐观锁 策略模式</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/25/Spring/" rel="next" title="Spring提供的事件驱动模型(观察者模式)">
+                  <i class="fa fa-chevron-left"></i> Spring提供的事件驱动模型(观察者模式)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/30/hello-world/" rel="prev" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/Spring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jimmy Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/25/Spring/" class="post-title-link" itemprop="url">Spring提供的事件驱动模型(观察者模式)</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-25 10:13:24" itemprop="dateCreated datePublished" datetime="2019-09-25T10:13:24+00:00">2019-09-25</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 08:49:17" itemprop="dateModified" datetime="2019-09-30T08:49:17+00:00">2019-09-30</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：</p>
-<ul>
-<li>首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者</li>
-<li>当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变</li>
-<li>观察者如何处理，目标无需干涉，所以就降低耦合度</li>
-</ul>
-<h2 id="用户注册的例子"><a href="#用户注册的例子" class="headerlink" title="用户注册的例子"></a>用户注册的例子</h2><p>游戏用户注册成功后，可能会发生这么多事</p>
-<ul>
-<li>加积分</li>
-<li>发确认邮件</li>
-<li>获得游戏大礼包</li>
-</ul>
-<p><strong><em>问题</em></strong><br>UserServiceImple类里需要引用创建积分的service，确认邮件的service等，耦合严重，增删功能比较麻烦，也有可能需要调用第三方接口，速度慢，代码维护性差，同时访问数据库多次，用户体验差。    </p>
-<p>从以上例子可以看出应该使用一个观察者来解耦service里的依赖关系增加一个Lisyener来解耦UserService和其他功能，即注册成功后，只需要通知相关监听器，不需要关系它们如何处理，一个接口只完成一个功能，增删功能非常容易。  </p>
-<p>首先看下Spring提供的事件驱动模型体系图</p>
-<img src="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
-
-<h2 id="事件代表者：ApplicationEvent"><a href="#事件代表者：ApplicationEvent" class="headerlink" title="事件代表者：ApplicationEvent"></a>事件代表者：ApplicationEvent</h2><p>系统默认提供了如下ApplicationEvent事件实现<br>只有一个ApplicationContextEvent，表示ApplicationContext容器事件，有如下实现</p>
-<ul>
-<li>ContextStantedEvent:ApplicationContext启动后触发的事件  </li>
-<li>ContextStoppedEvent:ApplicationContext停止后触发的事件</li>
-<li>ContextRefresheEvent:ApplicationContext初始化或者刷新完成后触发的事件</li>
-<li>ContextClosedEvent:ApplicationContext关闭后触发的事件</li>
-</ul>
-<h2 id="事件发布者：ApplicationEventPublisher"><a href="#事件发布者：ApplicationEventPublisher" class="headerlink" title="事件发布者：ApplicationEventPublisher"></a>事件发布者：ApplicationEventPublisher</h2><p>ApplicationContext接口继承了ApplicationEventPublisher，并在AbstractApplicationContext实现了具体代码，实际执行委托给了ApplicationEventMulicaster。源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">protected void publishEvent(Object event, @Nullable ResolvableType eventType) &#123;</span><br><span class="line">	Assert.notNull(event, &quot;Event must not be null&quot;);</span><br><span class="line"></span><br><span class="line">	// Decorate event as an ApplicationEvent if necessary</span><br><span class="line">	ApplicationEvent applicationEvent;</span><br><span class="line">	if (event instanceof ApplicationEvent) &#123;</span><br><span class="line">		applicationEvent = (ApplicationEvent) event;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		applicationEvent = new PayloadApplicationEvent&lt;&gt;(this, event);</span><br><span class="line">		if (eventType == null) &#123;</span><br><span class="line">			eventType = ((PayloadApplicationEvent&lt;?&gt;) applicationEvent).getResolvableType();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Multicast right now if possible - or lazily once the multicaster is initialized</span><br><span class="line">	if (this.earlyApplicationEvents != null) &#123;</span><br><span class="line">		this.earlyApplicationEvents.add(applicationEvent);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Publish event via parent context as well...</span><br><span class="line">	if (this.parent != null) &#123;</span><br><span class="line">		if (this.parent instanceof AbstractApplicationContext) &#123;</span><br><span class="line">			((AbstractApplicationContext) this.parent).publishEvent(event, eventType);</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			this.parent.publishEvent(event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们常用的ApplicationContext都继承自AbstractApplicationContext，如ClassPathXmlApplicationContext、XmlWebApplicationContext等。ApplicationContext自动到容器找一个名为ApplicationEventMulticaster实现，如果没有自己new一个SimpleApplicationEventMulticaster,其中SimpleApplicationEventMulticaster的源码可以看出，spring默认的事件处理方式是并行处理，根据事件的泛型类型，找到对应的Listener，并且使用线程池给给每个Listener分配线程处理。发布事件源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void multicastEvent(final ApplicationEvent event, @Nullable ResolvableType eventType) &#123;</span><br><span class="line">	ResolvableType type = (eventType != null ? eventType : resolveDefaultEventType(event));</span><br><span class="line">	for (final ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) &#123;</span><br><span class="line">		Executor executor = getTaskExecutor();</span><br><span class="line">		if (executor != null) &#123;</span><br><span class="line">			executor.execute(() -&gt; invokeListener(listener, event));</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			invokeListener(listener, event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="事件监听者-处理者-ApplicationListener"><a href="#事件监听者-处理者-ApplicationListener" class="headerlink" title="事件监听者(处理者):ApplicationListener"></a>事件监听者(处理者):ApplicationListener</h2><p>ApplicationListener 提供 onApplicationEvent方法，我们只需要实现该接口，并指定我们需要的处理的事件。并把改类放到spring容器管理。如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component </span><br><span class="line">public class EditReceiveOwnQuantityAfterBackOrder implements ApplicationListener&lt;OrderBackEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void onApplicationEvent(OrderBackEvent event) &#123;</span><br><span class="line">		// 业务代码</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/日志规范/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jimmy Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/25/日志规范/" class="post-title-link" itemprop="url">开发管理-日志规范</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-25 09:50:53" itemprop="dateCreated datePublished" datetime="2019-09-25T09:50:53+00:00">2019-09-25</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 08:49:17" itemprop="dateModified" datetime="2019-09-30T08:49:17+00:00">2019-09-30</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="禁止使用System-out-print"><a href="#禁止使用System-out-print" class="headerlink" title="禁止使用System.out.print"></a>禁止使用System.out.print</h2><p>不要在代码上直接使用System.out或System.err 输出日志    </p>
-<pre><code>System.out.println(&quot;--&gt; begin call sap finish service&quot;);
-System.out.println(&quot;--&gt; call sap finish service status {}&quot;+vo.getStatus());</code></pre><h2 id="统一使用-SLFJ"><a href="#统一使用-SLFJ" class="headerlink" title="统一使用 SLFJ"></a>统一使用 SLFJ</h2><p>我们在使用日志输出的时候，会考虑到以后会更换日志的实现，就如我们原来是用log4j，后来更换为log4j2，使用SLFJ，可以让我们的代码不用变更就能更换日志的框架。</p>
-<pre><code>import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-***JAVA代码****
-private static Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-
-***JAVA代码****
-LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="日志格式"><a href="#日志格式" class="headerlink" title="日志格式"></a>日志格式</h2><p>日志输出采用key，value的形式记录日志，key统一为大写，例如EVENT。EVENT记录的是，事件名称，为了方便后面定位问题，排错问题。key可以自行扩展，例如ORDER_ID=abc123456。</p>
-<pre><code>log.info(String.format(&quot;EVENT=SAP采购订单序列化|CONTENT=%s&quot;, ToStringBuilder.reflectionToString(sapOrderList)));</code></pre><h2 id="采用MDC标注日志上下文"><a href="#采用MDC标注日志上下文" class="headerlink" title="采用MDC标注日志上下文"></a>采用MDC标注日志上下文</h2><p>MDC（Mapped Diagnostic Context，映射调试上下文）为了方便在多线程条件下记录日志的功能。当我们采用多线程的方式来处理用户的请求日志都打印在同一个文件上，比较难以区分不同请求下所对应的日志。当需要追踪某个用户在系统中的相关日志记录时，就会变得很麻烦。<br>使用MDC就是采用ThreadLocal的方式，给每一个线程一个mdcId，记录该线程下所有操作。</p>
-<pre><code>import org.slf4j.MDC;
-
-***java代码***
-MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;));
-
-***日志输出格式***
-&lt;Property name=&quot;PATTERN_FORMAT&quot;&gt;%d{DEFAULT} [%thread:%X{mdc-uuid}] %-5level %logger{36} - %msg%n&lt;/Property&gt;
-&lt;/Properties&gt;</code></pre><h2 id="不要在日志里面做字符串拼接"><a href="#不要在日志里面做字符串拼接" class="headerlink" title="不要在日志里面做字符串拼接"></a>不要在日志里面做字符串拼接</h2><p>采用字符串拼接的方式，其实不利于代码的可读性和可维护性，建议通过占位符的方式输入日志。</p>
-<h2 id="保证日志输出的时候，不会出现异常"><a href="#保证日志输出的时候，不会出现异常" class="headerlink" title="保证日志输出的时候，不会出现异常"></a>保证日志输出的时候，不会出现异常</h2><p>其实不仅仅是日志的输出，我们在日常写代码的时候，也要注意不要输入异常。但是如果在日志的输出的地方造成异常，会导致日志的输出失败，而且没有相关的错误信息，会让排查错误造成困难。如下面的代码，如果vo为空，这个日志就会抛空指针异常。</p>
-<pre><code>LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="异常的输出，必须打印堆栈信息"><a href="#异常的输出，必须打印堆栈信息" class="headerlink" title="异常的输出，必须打印堆栈信息"></a>异常的输出，必须打印堆栈信息</h2><p>捕获到异常后，不能使用e.printStackTrace()，而是通过log error日志输出异常的所有的堆栈。</p>
-<pre><code>} catch (Exception e) {
-    LOGGER.error(&quot;EVENT=SAP采购订单序列化异常&quot;,e);     
-}</code></pre>
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </div>
-
-  
 
 
           </div>
@@ -748,6 +488,11 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -760,6 +505,8 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#需求分析"><span class="nav-number">1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统设计"><span class="nav-number">2.</span> <span class="nav-text">系统设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务接口的定义"><span class="nav-number">3.1.</span> <span class="nav-text">服务接口的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单据规则策略接口的定义"><span class="nav-number">3.2.</span> <span class="nav-text">单据规则策略接口的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单据号规则的工厂类"><span class="nav-number">3.3.</span> <span class="nav-text">单据号规则的工厂类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机Id的规则策略实现"><span class="nav-number">3.4.</span> <span class="nav-text">随机Id的规则策略实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#雪花Id的规则策略实现"><span class="nav-number">3.5.</span> <span class="nav-text">雪花Id的规则策略实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流水号-自增Id-的规则策略实现"><span class="nav-number">3.6.</span> <span class="nav-text">流水号(自增Id)的规则策略实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期-流水号-自增Id-的规则策略实现"><span class="nav-number">3.7.</span> <span class="nav-text">日期+流水号(自增Id)的规则策略实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能测试"><span class="nav-number">4.</span> <span class="nav-text">性能测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#随机码的测试结果"><span class="nav-number">4.1.</span> <span class="nav-text">随机码的测试结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流水号-自增Id-的测试结果"><span class="nav-number">4.2.</span> <span class="nav-text">流水号(自增Id)的测试结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期-流水号-自增Id-的测试结果"><span class="nav-number">4.3.</span> <span class="nav-text">日期+流水号(自增Id)的测试结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拓展思考"><span class="nav-number">5.</span> <span class="nav-text">拓展思考</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
