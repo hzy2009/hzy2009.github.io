@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 09:00:21" itemprop="dateModified" datetime="2019-09-30T09:00:21+00:00">2019-09-30</time>
+                <time title="修改时间：2019-09-30 09:15:21" itemprop="dateModified" datetime="2019-09-30T09:15:21+00:00">2019-09-30</time>
               </span>
             
           
@@ -248,6 +248,7 @@
       
           <h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>在我们以往做过的各个项目中，用户为了给单据做归档，尤其是根据打印后的纸质单据做归档，往往要求单据号要特定的规则，有的要有流水号，有的要随机号，有的单据需要带前缀，有的要带后缀。举个例子，我们要做一个送货单的单据号生成服务，希望送货单是由前缀D + 日期 + 流水号的方式组成，例如D20190926000001、D20190926000002、D20190926000003。    </p>
 <p>对于各种单据号的生成，其实很多是很类似的，我们需要写一个通用发号机功能，并作为一个公共服务开放出来，可以支持各种发号的规则，同时支持高并发的情况。</p>
+<p>该文章的所有源码请参考如下：<br><a href="https://github.com/hzy2009/id-generator" target="_blank" rel="noopener">https://github.com/hzy2009/id-generator</a></p>
 <h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><p>目前需求有3个关键的点:  </p>
 <ol>
 <li>发号机可以通过restful的方式把服务开放出来。</li>
@@ -265,7 +266,7 @@
 <p><strong><em>使用Redis的INCR的命令，保证流水号连贯不重复</em></strong>  </p>
 <p>由于流水号是需要单据号是要连贯的，所以要记录当前流水号是什么，才能知道下一个号是什么。因此我们需要把单据的流水号持久化，当服务重启的时候，不用担心会丢失当前的流水号，导致无法往下接。这里我们先采用redis作为持久化的数据库。考虑到并发的情况，我们通过INCR的方式来更新最新的流水号。</p>
 <h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>根据以上的设计思路，项目结构如下：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">|-- generator</span><br><span class="line">    |-- IdGeneratorApplication.java           //系统启动类</span><br><span class="line">    |-- client</span><br><span class="line">    |   |-- IdGeneratorService.java           //接口服务定义</span><br><span class="line">    |-- controller</span><br><span class="line">    |   |-- IdGeneratorController.java        //接口服务实现</span><br><span class="line">    |-- model</span><br><span class="line">    |-- service</span><br><span class="line">        |-- IdGenerator.java                  //发号机接口</span><br><span class="line">        |-- IdGeneratorFactory.java           //规则策略工厂</span><br><span class="line">        |-- IdStrategy.java	                   //规则策略接口</span><br><span class="line">        |-- impl</span><br><span class="line">            |-- IdGeneratorImpl.java          //发号机号实现</span><br><span class="line">            |-- AutoIncrementStrategy.java    //流水号(自增Id)规则实现</span><br><span class="line">            |-- DateIncrementStrategy.java    //日期加流水号(自增Id)规则实现</span><br><span class="line">            |-- SnowFlakeStrategy.java        //雪花ID规则实现</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">|-- generator</span><br><span class="line">    |-- IdGeneratorApplication.java          //启动类</span><br><span class="line">    |-- IdGeneratorConfiguration.java        //配置类</span><br><span class="line">    |-- SpringContextHolder.java             //工具类</span><br><span class="line">    |-- client</span><br><span class="line">       |   |-- IdGeneratorService.java       //接口服务定义</span><br><span class="line">       |-- controller</span><br><span class="line">       |   |-- IdGeneratorController.java    //接口服务实现</span><br><span class="line">       |-- model</span><br><span class="line">       |-- service</span><br><span class="line">           |-- IdGeneratorFactory.java       //规则策略工厂</span><br><span class="line">           |-- IdStrategy.java               //发号机接口</span><br><span class="line">           |-- impl</span><br><span class="line">               |-- AutoIncrementStrategy.java  //流水号(自增Id)规则实现</span><br><span class="line">               |-- DateIncrementStrategy.java  //日期加流水号(自增Id)规则实现</span><br><span class="line">               |-- RandomStrategy.java         //日期加随机码规则实现</span><br><span class="line">               |-- SnowFlakeStrategy.java      //雪花ID规则实现</span><br></pre></td></tr></table></figure>
 
 <h2 id="服务接口的定义"><a href="#服务接口的定义" class="headerlink" title="服务接口的定义"></a>服务接口的定义</h2><p>根据之前需求的理解，对发号机的接口做了简单定义，里面包含以下方法：  </p>
 <ul>
@@ -475,7 +476,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 09:00:21" itemprop="dateModified" datetime="2019-09-30T09:00:21+00:00">2019-09-30</time>
+                <time title="修改时间：2019-09-30 09:15:21" itemprop="dateModified" datetime="2019-09-30T09:15:21+00:00">2019-09-30</time>
               </span>
             
           
@@ -586,7 +587,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-30 09:00:21" itemprop="dateModified" datetime="2019-09-30T09:00:21+00:00">2019-09-30</time>
+                <time title="修改时间：2019-09-30 09:15:21" itemprop="dateModified" datetime="2019-09-30T09:15:21+00:00">2019-09-30</time>
               </span>
             
           
