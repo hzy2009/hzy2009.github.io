@@ -25,7 +25,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -60,11 +60,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring提供的事件驱动模型(观察者模式)">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/Spring/index.html">
-<meta property="og:site_name" content="黄志泳的博客-学习、分享、成长">
+<meta property="og:site_name" content="志泳的博客-学习、分享、成长">
 <meta property="og:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
-<meta property="og:updated_time" content="2019-10-05T11:39:50.570Z">
+<meta property="og:updated_time" content="2019-10-05T12:35:53.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring提供的事件驱动模型(观察者模式)">
 <meta name="twitter:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>Spring提供的事件驱动模型(观察者模式) | 黄志泳的博客-学习、分享、成长</title>
+  <title>Spring提供的事件驱动模型(观察者模式) | 志泳的博客-学习、分享、成长</title>
   
 
 
@@ -130,7 +130,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">黄志泳的博客-学习、分享、成长</span>
+        <span class="site-title">志泳的博客-学习、分享、成长</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -173,8 +173,6 @@
   </li>
   </ul>
 
-    
-
 </nav>
 </div>
     </header>
@@ -189,6 +187,8 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content">
             
 
@@ -207,7 +207,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
+      <meta itemprop="name" content="志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Spring提供的事件驱动模型(观察者模式)
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
+                <time title="修改时间：2019-10-05 12:35:53" itemprop="dateModified" datetime="2019-10-05T12:35:53+00:00">2019-10-05</time>
               </span>
             
           
@@ -423,7 +423,7 @@
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.0</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
         
 
@@ -450,7 +450,8 @@
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/muse.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
 <script src="/js/next-boot.js?v=7.4.0"></script>
 
 
