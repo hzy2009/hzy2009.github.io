@@ -650,10 +650,14 @@ changyan:
 # You can get your appid and appkey from https://leancloud.cn
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: false # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version
-  appid: # Your leancloud application appid
-  appkey: # Your leancloud application appkey
-  notify: false # Mail notifier. See: https://github.com/xCss/Valine/wiki
+  # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version
+  enable: false 
+  # Your leancloud application appid
+  appid: IQULVpBpdCXxNsmI18S38Uda-gzGzoHsz
+  # Your leancloud application appkey
+  appkey: sa3L9OtC0MEb5a1Imy7YnQlV
+   # Mail notifier. See: https://github.com/xCss/Valine/wiki
+  notify: false
   verify: false # Verification code
   placeholder: Just go go # Comment box placeholder
   avatar: mm # Gravatar style
@@ -672,17 +676,22 @@ livere_uid: # <your_uid>
 # Demo: https://gitalk.github.io
 # For more information: https://github.com/gitalk/gitalk
 gitalk:
-  enable: false
-  github_id: # GitHub repo owner
-  repo: # Repository name to store issues
-  client_id: # GitHub Application Client ID
-  client_secret: # GitHub Application Client Secret
-  admin_user: # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  enable: true
+  # GitHub repo owner
+  github_id: huangzhiyong2011@gmail.com
+  # Repository name to store issues
+  repo: blog-comment
+  # GitHub Application Client ID
+  client_id: 1e03a8c2c942a007aa2d
+  # GitHub Application Client Secret
+  client_secret: c13db1d348fcbb2f0151ed1472c95119b9b34445
+  # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  admin_user: huangzhiyong2011@gmail.com
   distraction_free_mode: true # Facebook-like distraction free mode
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
-  language:
+  language: zh-CN
 
 
 # ---------------------------------------------------------------
