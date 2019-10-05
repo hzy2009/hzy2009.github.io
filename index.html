@@ -56,12 +56,12 @@
 </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="jimmy&#39;s blog">
+<meta property="og:title" content="黄志泳的博客-学习、分享、成长">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="jimmy&#39;s blog">
+<meta property="og:site_name" content="黄志泳的博客-学习、分享、成长">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jimmy&#39;s blog">
+<meta name="twitter:title" content="黄志泳的博客-学习、分享、成长">
   <link rel="canonical" href="http://yoursite.com/">
 
 
@@ -76,7 +76,7 @@
   };
 </script>
 
-  <title>jimmy's blog</title>
+  <title>黄志泳的博客-学习、分享、成长</title>
   
 
 
@@ -123,7 +123,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">jimmy's blog</span>
+        <span class="site-title">黄志泳的博客-学习、分享、成长</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -190,6 +190,91 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/02/开发管理-git管理规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jimmy Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/02/开发管理-git管理规范/" class="post-title-link" itemprop="url">开发管理-GIT分支管理</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-02 16:00:09" itemprop="dateCreated datePublished" datetime="2019-10-02T16:00:09+00:00">2019-10-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>&emsp;&emsp;分支策略实际上是软件开发中很重要的决策。决定了分支策略，其实就决定了我们开发团队的合作模式，代码的结构，后续的衔接CI/CD的流水线。  </p>
+<p>&emsp;&emsp;考虑选择什么样的分支策略的时候，要把分支策略放到整个持续交付的框架中考虑。配合我们团队模型，采用不同的分支结构，可以达到不同的分支效率。  </p>
+<p>&emsp;&emsp;按照职能划分的分支结构，发布速度是比较慢，可能很多人不太理解为什么这个分支的结构和职能的相关。我们看分支的名称就知道，我们的分支有developer、test、release。其实这些分支分别对应了我们的开发人员、测试人员、运维人员。也就是一般来说，是按照不同的阶段，不同的职能来划分，那么当我们采用这样划分策略的时候，意味着任何一段要交付给客户的代码，到了要发布上线的时候。他必须要经过开发测试到发布，甚至在里面循环好几次.这种情况下，就会出现，不仅人员之间的交接，还有代码下的交接，甚至回滚。如果要我们开发速度提高上去，我们就要选择这种比较优化的模型。</p>
+<p>&emsp;&emsp;传统的按照职能划分的分支，我们可以看到，会区分为main 、developer、 release分支。这种分支流程是无法按照交付来挑选代码发布，因为每一次的发布，必须要穿过这三条分支才能交付到客户。那么这样机会出现很多交接的过程、合并的过程。</p>
+<p>&emsp;&emsp;特性模型的分支，是面向客户的，面向需求的划分策略，他会把客户的需求或者说某一个完整的业务场景，放到一个分支上面，并且在这个分支上做完整开发、测试、发布的操作。当我们确定这个分支上的代码是可发布的，而且是用户认可的时候，我们才会合并到我们的master上面。在这种情况下，第一我们所有的业务代码都集中在一起，非常清晰地，通过某个特定的分支，获取特定的业务的代码。那么在我们上线的时候，就可以非常容易的看到我的这个改动是针对这个业务场景的。如果用MDR的分支模式，其实是很难做到，因为大家都往developer分支里面写代码，所有的代码都混合到一起。在特性分支里面，我们有多条不同的并行的特性分支。这样我们就可以清晰的看到投产的代码和生产的代码，差异在哪里。而这个差异我们可以缩小到某个特定的业务场景里面。这样就可以帮忙做到功能的隔离，以及不同功能间并行测试，进行code review，进行打包。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/列出1小时内占用CPU最多的10个进程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,7 +284,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
+      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -219,11 +304,19 @@
                 
               
 
-              <time title="创建时间：2019-10-01 17:42:21 / 修改时间：14:49:15" itemprop="dateCreated datePublished" datetime="2019-10-01T17:42:21+00:00">2019-10-01</time>
+              <time title="创建时间：2019-10-01 17:42:21" itemprop="dateCreated datePublished" datetime="2019-10-01T17:42:21+00:00">2019-10-01</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
+              </span>
             
           
 
@@ -278,7 +371,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
+      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -309,7 +402,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-01 14:49:15" itemprop="dateModified" datetime="2019-10-01T14:49:15+00:00">2019-10-01</time>
+                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
               </span>
             
           
@@ -524,7 +617,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
+      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -555,7 +648,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-01 14:49:15" itemprop="dateModified" datetime="2019-10-01T14:49:15+00:00">2019-10-01</time>
+                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
               </span>
             
           
@@ -626,7 +719,7 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/日志规范/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jimmy Wong">
@@ -635,12 +728,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jimmy's blog">
+      <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/09/25/日志规范/" class="post-title-link" itemprop="url">开发管理-日志规范</a>
+            <a href="/2019/09/25/开发管理-日志规范/" class="post-title-link" itemprop="url">开发管理-日志规范</a>
           
         </h1>
 
@@ -666,7 +759,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-01 14:49:15" itemprop="dateModified" datetime="2019-10-01T14:49:15+00:00">2019-10-01</time>
+                <time title="修改时间：2019-10-05 11:39:50" itemprop="dateModified" datetime="2019-10-05T11:39:50+00:00">2019-10-05</time>
               </span>
             
           
@@ -772,7 +865,7 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

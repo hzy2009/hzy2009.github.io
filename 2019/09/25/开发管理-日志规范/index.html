@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="在我们实际运维和服务器性能测试的时候，需要知道CPU的使用情况，以下引用《Linux Shell脚本攻略》的文章，介绍一下，如果列出1小时内占用CPU最多的10个进程。 CPU时间是一项重要的资源，有事我们需要跟踪某个时期内占用CPU周期最多的进程。在普通的桌面系统上，CPU处于高负荷状态也许不会引发问题，但是对于需要处理大量请求的服务器来说，CPU是极其重要的资源。通过监视某个时期内CPU的使用">
-<meta name="keywords" content="技术分享">
+  <meta name="description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志     System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quo">
+<meta name="keywords" content="开发管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="列出1小时内占用CPU最多的10个进程">
-<meta property="og:url" content="http://yoursite.com/2019/10/01/列出1小时内占用CPU最多的10个进程/index.html">
+<meta property="og:title" content="开发管理-日志规范">
+<meta property="og:url" content="http://yoursite.com/2019/09/25/开发管理-日志规范/index.html">
 <meta property="og:site_name" content="黄志泳的博客-学习、分享、成长">
-<meta property="og:description" content="在我们实际运维和服务器性能测试的时候，需要知道CPU的使用情况，以下引用《Linux Shell脚本攻略》的文章，介绍一下，如果列出1小时内占用CPU最多的10个进程。 CPU时间是一项重要的资源，有事我们需要跟踪某个时期内占用CPU周期最多的进程。在普通的桌面系统上，CPU处于高负荷状态也许不会引发问题，但是对于需要处理大量请求的服务器来说，CPU是极其重要的资源。通过监视某个时期内CPU的使用">
+<meta property="og:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志     System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-05T11:39:50.570Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="列出1小时内占用CPU最多的10个进程">
-<meta name="twitter:description" content="在我们实际运维和服务器性能测试的时候，需要知道CPU的使用情况，以下引用《Linux Shell脚本攻略》的文章，介绍一下，如果列出1小时内占用CPU最多的10个进程。 CPU时间是一项重要的资源，有事我们需要跟踪某个时期内占用CPU周期最多的进程。在普通的桌面系统上，CPU处于高负荷状态也许不会引发问题，但是对于需要处理大量请求的服务器来说，CPU是极其重要的资源。通过监视某个时期内CPU的使用">
-  <link rel="canonical" href="http://yoursite.com/2019/10/01/列出1小时内占用CPU最多的10个进程/">
+<meta name="twitter:title" content="开发管理-日志规范">
+<meta name="twitter:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志     System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quo">
+  <link rel="canonical" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>列出1小时内占用CPU最多的10个进程 | 黄志泳的博客-学习、分享、成长</title>
+  <title>开发管理-日志规范 | 黄志泳的博客-学习、分享、成长</title>
   
 
 
@@ -196,7 +196,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/列出1小时内占用CPU最多的10个进程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jimmy Wong">
@@ -208,7 +208,7 @@
       <meta itemprop="name" content="黄志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">列出1小时内占用CPU最多的10个进程
+        <h1 class="post-title" itemprop="name headline">开发管理-日志规范
 
           
         </h1>
@@ -224,7 +224,7 @@
                 
               
 
-              <time title="创建时间：2019-10-01 17:42:21" itemprop="dateCreated datePublished" datetime="2019-10-01T17:42:21+00:00">2019-10-01</time>
+              <time title="创建时间：2019-09-25 09:50:53" itemprop="dateCreated datePublished" datetime="2019-09-25T09:50:53+00:00">2019-09-25</time>
             </span>
           
             
@@ -251,14 +251,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在我们实际运维和服务器性能测试的时候，需要知道CPU的使用情况，以下引用《Linux Shell脚本攻略》的文章，介绍一下，如果列出1小时内占用CPU最多的10个进程。</p>
-<p>CPU时间是一项重要的资源，有事我们需要跟踪某个时期内占用CPU周期最多的进程。在普通的桌面系统上，CPU处于高负荷状态也许不会引发问题，但是对于需要处理大量请求的服务器来说，CPU是极其重要的资源。通过监视某个时期内CPU的使用情况，我们可以找出长期占用CPU的进程并进行优化，或是调试其他问题。今天分享一个有关进程监视和日志记录的命令。</p>
-<h1 id="新手上路"><a href="#新手上路" class="headerlink" title="新手上路"></a>新手上路</h1><p>ps命令用于收集系统中进程的详细信息。这些信息包括CPU使用情况、正在执行的命令、内存使用、进程状态等。记录在一个小时内占用郭CPU进程，然后通过恰当地运用ps以及文本处理就可以找出占用CPU最多的10个进程。</p>
-<h1 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h1><p>让我们看看用于监视并计算一小时内CPU使用情况的shell脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#文件名:pcpu_usage.sh</span><br><span class="line">#用途:计算1个小时内进程的CPU占用情况</span><br><span class="line"></span><br><span class="line">SECS=3600</span><br><span class="line">UNIT_TIME=60</span><br><span class="line"></span><br><span class="line">#将SECS更改陈需要进行监视的总秒数</span><br><span class="line">#UNIT_TIME是取样的时间间隔，单位是秒</span><br><span class="line"></span><br><span class="line">STEPS=$(( $SECS / $UNIT_TIME ))</span><br><span class="line">echo Watching CPU usage ...;</span><br><span class="line">for((i=0;i&lt;STEPS;i++))</span><br><span class="line">do</span><br><span class="line">  ps -eo comm.pcpu | tail -n +2 &gt;&gt; /tmp/cpu_usage.$$</span><br><span class="line">  sleep $UNIT_TIME</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">echo</span><br><span class="line">echo CPU eaters :</span><br><span class="line"></span><br><span class="line">cat /tmp/cpu_usage.$$ | \</span><br><span class="line">awk &apos;</span><br><span class="line">&#123; process[$1]+=$2; &#125;</span><br><span class="line">END&#123;</span><br><span class="line">  for(i in process)</span><br><span class="line">  &#123;</span><br><span class="line">    printef(&quot;%-20s %s&quot;,i, process[i]) ;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&apos; | sort -nrk 2 | head</span><br><span class="line">rm  /tmp/cpu_usage.$$</span><br><span class="line">#删除临时日志文件</span><br></pre></td></tr></table></figure>
+        <h2 id="禁止使用System-out-print"><a href="#禁止使用System-out-print" class="headerlink" title="禁止使用System.out.print"></a>禁止使用System.out.print</h2><p>不要在代码上直接使用System.out或System.err 输出日志    </p>
+<pre><code>System.out.println(&quot;--&gt; begin call sap finish service&quot;);
+System.out.println(&quot;--&gt; call sap finish service status {}&quot;+vo.getStatus());</code></pre><h2 id="统一使用-SLFJ"><a href="#统一使用-SLFJ" class="headerlink" title="统一使用 SLFJ"></a>统一使用 SLFJ</h2><p>我们在使用日志输出的时候，会考虑到以后会更换日志的实现，就如我们原来是用log4j，后来更换为log4j2，使用SLFJ，可以让我们的代码不用变更就能更换日志的框架。</p>
+<pre><code>import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-<h1 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h1><p>在上面的脚本中，主要的输入源是  ps -eo comm.pcpu， 其中comm 表示命令名 (command name), pcpu 表示CPU使用率(CPU usage in precent)。该命令输出所有进程名及CPU使用率。每个进程对应一行输出。因为需要监视一小时内CPU的使用情况，所以我们得在一个每次迭代时间为60秒的for循环中不停地用  ps -eo comm.pcpu| tail -n +2来获取CPU的使用统计数据，并将这些数据添加到文件 /tmp/cpu_usage.$$中。60喵的迭代时间通过sleep 60来提供。这就使得每一分钟执行一次ps。<br>tail -n +2 用来将输出中的头部和COMMAND %CPU剥除。<br>cpu_usage.$$中的$$标识当前脚本的进程ID。假设进程ID为1345，那么在脚本执行时他会被替换位 /tmp/cpu_usage.1345。因为这适应临时文件，所以我们把它放到/tmp中。<br>统计文件在1小时后就准备妥当，文件包含60项，分别对应每分钟的进程状态。然后用awk 求出每个进程中的CPU使用情况，我们用了一个关联数组来统计CPU使用情况。其中进程名作为数组索引，最后根据总得CPU使用情况依数值，逆序排序，并通过head获取前10项。</p>
+***JAVA代码****
+private static Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
+
+***JAVA代码****
+LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="日志格式"><a href="#日志格式" class="headerlink" title="日志格式"></a>日志格式</h2><p>日志输出采用key，value的形式记录日志，key统一为大写，例如EVENT。EVENT记录的是，事件名称，为了方便后面定位问题，排错问题。key可以自行扩展，例如ORDER_ID=abc123456。</p>
+<pre><code>log.info(String.format(&quot;EVENT=SAP采购订单序列化|CONTENT=%s&quot;, ToStringBuilder.reflectionToString(sapOrderList)));</code></pre><h2 id="采用MDC标注日志上下文"><a href="#采用MDC标注日志上下文" class="headerlink" title="采用MDC标注日志上下文"></a>采用MDC标注日志上下文</h2><p>MDC（Mapped Diagnostic Context，映射调试上下文）为了方便在多线程条件下记录日志的功能。当我们采用多线程的方式来处理用户的请求日志都打印在同一个文件上，比较难以区分不同请求下所对应的日志。当需要追踪某个用户在系统中的相关日志记录时，就会变得很麻烦。<br>使用MDC就是采用ThreadLocal的方式，给每一个线程一个mdcId，记录该线程下所有操作。</p>
+<pre><code>import org.slf4j.MDC;
+
+***java代码***
+MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;));
+
+***日志输出格式***
+&lt;Property name=&quot;PATTERN_FORMAT&quot;&gt;%d{DEFAULT} [%thread:%X{mdc-uuid}] %-5level %logger{36} - %msg%n&lt;/Property&gt;
+&lt;/Properties&gt;</code></pre><h2 id="不要在日志里面做字符串拼接"><a href="#不要在日志里面做字符串拼接" class="headerlink" title="不要在日志里面做字符串拼接"></a>不要在日志里面做字符串拼接</h2><p>采用字符串拼接的方式，其实不利于代码的可读性和可维护性，建议通过占位符的方式输入日志。</p>
+<h2 id="保证日志输出的时候，不会出现异常"><a href="#保证日志输出的时候，不会出现异常" class="headerlink" title="保证日志输出的时候，不会出现异常"></a>保证日志输出的时候，不会出现异常</h2><p>其实不仅仅是日志的输出，我们在日常写代码的时候，也要注意不要输入异常。但是如果在日志的输出的地方造成异常，会导致日志的输出失败，而且没有相关的错误信息，会让排查错误造成困难。如下面的代码，如果vo为空，这个日志就会抛空指针异常。</p>
+<pre><code>LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="异常的输出，必须打印堆栈信息"><a href="#异常的输出，必须打印堆栈信息" class="headerlink" title="异常的输出，必须打印堆栈信息"></a>异常的输出，必须打印堆栈信息</h2><p>捕获到异常后，不能使用e.printStackTrace()，而是通过log error日志输出异常的所有的堆栈。</p>
+<pre><code>} catch (Exception e) {
+    LOGGER.error(&quot;EVENT=SAP采购订单序列化异常&quot;,e);     
+}</code></pre>
     </div>
 
     
@@ -273,7 +291,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/技术分享/" rel="tag"># 技术分享</a>
+              <a href="/tags/开发管理/" rel="tag"># 开发管理</a>
             
           </div>
         
@@ -283,18 +301,14 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/26/手写一个永不重复的发号机/" rel="next" title="手写一个规则可配置的高并发的发号机">
-                  <i class="fa fa-chevron-left"></i> 手写一个规则可配置的高并发的发号机
-                </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/10/02/开发管理-git管理规范/" rel="prev" title="开发管理-GIT分支管理">
-                  开发管理-GIT分支管理 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/25/Spring/" rel="prev" title="Spring提供的事件驱动模型(观察者模式)">
+                  Spring提供的事件驱动模型(观察者模式) <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -344,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新手上路"><span class="nav-number">1.</span> <span class="nav-text">新手上路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战演练"><span class="nav-number">2.</span> <span class="nav-text">实战演练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作原理"><span class="nav-number">3.</span> <span class="nav-text">工作原理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁止使用System-out-print"><span class="nav-number">1.</span> <span class="nav-text">禁止使用System.out.print</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统一使用-SLFJ"><span class="nav-number">2.</span> <span class="nav-text">统一使用 SLFJ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志格式"><span class="nav-number">3.</span> <span class="nav-text">日志格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#采用MDC标注日志上下文"><span class="nav-number">4.</span> <span class="nav-text">采用MDC标注日志上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要在日志里面做字符串拼接"><span class="nav-number">5.</span> <span class="nav-text">不要在日志里面做字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保证日志输出的时候，不会出现异常"><span class="nav-number">6.</span> <span class="nav-text">保证日志输出的时候，不会出现异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常的输出，必须打印堆栈信息"><span class="nav-number">7.</span> <span class="nav-text">异常的输出，必须打印堆栈信息</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
