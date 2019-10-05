@@ -744,7 +744,8 @@ add_this_id:
 # ---------------------------------------------------------------
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+# <app_id>
+baidu_analytics: aff336890e85bc8e76e40e879cca6bf8 
 
 # Growingio Analytics
 # Copyright 2015-2018 GrowingIO, Inc. More info available at https://www.growingio.com
