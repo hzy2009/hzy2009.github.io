@@ -64,7 +64,7 @@
 <meta property="og:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
-<meta property="og:updated_time" content="2019-10-05T12:35:53.244Z">
+<meta property="og:updated_time" content="2019-10-05T14:17:13.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring提供的事件驱动模型(观察者模式)">
 <meta name="twitter:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-05 12:35:53" itemprop="dateModified" datetime="2019-10-05T12:35:53+00:00">2019-10-05</time>
+                <time title="修改时间：2019-10-05 14:17:13" itemprop="dateModified" datetime="2019-10-05T14:17:13+00:00">2019-10-05</time>
               </span>
             
           
@@ -339,6 +339,9 @@
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -483,6 +486,25 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1e03a8c2c942a007aa2d',
+      clientSecret: 'c13db1d348fcbb2f0151ed1472c95119b9b34445',
+      repo: 'blog-comment',
+      owner: 'huangzhiyong2011@gmail.com',
+      admin: ['huangzhiyong2011@gmail.com'],
+      id: '4303bc8fc77c396b482f631acd2d3ddb',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>
