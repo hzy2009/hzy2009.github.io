@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
+  <meta name="description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
 <meta name="keywords" content="Spring 观察者模式 事件驱动模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring提供的事件驱动模型(观察者模式)">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/Spring/index.html">
 <meta property="og:site_name" content="志泳的博客-学习、分享、成长">
-<meta property="og:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
+<meta property="og:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
-<meta property="og:updated_time" content="2019-10-06T11:21:11.293Z">
+<meta property="og:updated_time" content="2019-10-06T13:44:25.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring提供的事件驱动模型(观察者模式)">
-<meta name="twitter:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：  首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度  用户注册的例子游戏用户注册成功后，可能会发生这么多事  加积分 发确认邮件 获得游戏大礼包  问">
+<meta name="twitter:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
 <meta name="twitter:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
   <link rel="canonical" href="http://yoursite.com/2019/09/25/Spring/">
 
@@ -246,7 +246,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-06 11:21:11" itemprop="dateModified" datetime="2019-10-06T11:21:11+00:00">2019-10-06</time>
+                <time title="修改时间：2019-10-06 13:44:25" itemprop="dateModified" datetime="2019-10-06T13:44:25+00:00">2019-10-06</time>
               </span>
             
           
@@ -262,19 +262,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：</p>
-<ul>
+        <h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：</p><ul>
 <li>首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者</li>
 <li>当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变</li>
 <li>观察者如何处理，目标无需干涉，所以就降低耦合度</li>
-</ul>
-<h2 id="用户注册的例子"><a href="#用户注册的例子" class="headerlink" title="用户注册的例子"></a>用户注册的例子</h2><p>游戏用户注册成功后，可能会发生这么多事</p>
-<ul>
+</ul><h2 id="用户注册的例子"><a href="#用户注册的例子" class="headerlink" title="用户注册的例子"></a>用户注册的例子</h2><p>游戏用户注册成功后，可能会发生这么多事</p><ul>
 <li>加积分</li>
 <li>发确认邮件</li>
 <li>获得游戏大礼包</li>
-</ul>
-<p><strong><em>问题</em></strong><br>UserServiceImple类里需要引用创建积分的service，确认邮件的service等，耦合严重，增删功能比较麻烦，也有可能需要调用第三方接口，速度慢，代码维护性差，同时访问数据库多次，用户体验差。    </p>
+</ul><p><strong><em>问题</em></strong><br>UserServiceImple类里需要引用创建积分的service，确认邮件的service等，耦合严重，增删功能比较麻烦，也有可能需要调用第三方接口，速度慢，代码维护性差，同时访问数据库多次，用户体验差。    </p><a id="more"></a>
+
+
+
+
 <p>从以上例子可以看出应该使用一个观察者来解耦service里的依赖关系增加一个Lisyener来解耦UserService和其他功能，即注册成功后，只需要通知相关监听器，不需要关系它们如何处理，一个接口只完成一个功能，增删功能非常容易。  </p>
 <p>首先看下Spring提供的事件驱动模型体系图</p>
 <img src="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
