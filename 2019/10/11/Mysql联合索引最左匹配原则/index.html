@@ -55,19 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
-<meta name="keywords" content="开发管理">
+  <meta name="description" content="前言之前在网上看到过很多关于mysql联合索引最左前缀匹配的文章，自以为就了解了其原理，最近面试时和面试官交流，发现遗漏了些东西，这里自己整理一下这方面的内容。最左前缀匹配原则在mysql建立联合索引时会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配，示例：对列col1、列col2和列col3建一个联合索引KEY test_col1_col2_col3 on test(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发管理-日志规范">
-<meta property="og:url" content="http://yoursite.com/2019/09/25/开发管理-日志规范/index.html">
+<meta property="og:title" content="Mysql联合索引最左匹配原则">
+<meta property="og:url" content="http://yoursite.com/2019/10/11/Mysql联合索引最左匹配原则/index.html">
 <meta property="og:site_name" content="志泳的博客-学习、分享、成长">
-<meta property="og:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
+<meta property="og:description" content="前言之前在网上看到过很多关于mysql联合索引最左前缀匹配的文章，自以为就了解了其原理，最近面试时和面试官交流，发现遗漏了些东西，这里自己整理一下这方面的内容。最左前缀匹配原则在mysql建立联合索引时会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配，示例：对列col1、列col2和列col3建一个联合索引KEY test_col1_col2_col3 on test(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-11T04:22:33.794Z">
+<meta property="og:updated_time" content="2019-10-11T04:22:33.790Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开发管理-日志规范">
-<meta name="twitter:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
-  <link rel="canonical" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
+<meta name="twitter:title" content="Mysql联合索引最左匹配原则">
+<meta name="twitter:description" content="前言之前在网上看到过很多关于mysql联合索引最左前缀匹配的文章，自以为就了解了其原理，最近面试时和面试官交流，发现遗漏了些东西，这里自己整理一下这方面的内容。最左前缀匹配原则在mysql建立联合索引时会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配，示例：对列col1、列col2和列col3建一个联合索引KEY test_col1_col2_col3 on test(">
+  <link rel="canonical" href="http://yoursite.com/2019/10/11/Mysql联合索引最左匹配原则/">
 
 
 <script id="page-configurations">
@@ -81,7 +80,7 @@
   };
 </script>
 
-  <title>开发管理-日志规范 | 志泳的博客-学习、分享、成长</title>
+  <title>Mysql联合索引最左匹配原则 | 志泳的博客-学习、分享、成长</title>
   
 
 
@@ -205,7 +204,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/Mysql联合索引最左匹配原则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jimmy Wong">
@@ -217,7 +216,7 @@
       <meta itemprop="name" content="志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">开发管理-日志规范
+        <h1 class="post-title" itemprop="name headline">Mysql联合索引最左匹配原则
 
           
         </h1>
@@ -233,19 +232,11 @@
                 
               
 
-              <time title="创建时间：2019-09-25 09:50:53" itemprop="dateCreated datePublished" datetime="2019-09-25T09:50:53+00:00">2019-09-25</time>
+              <time title="创建时间：2019-10-11 11:04:17 / 修改时间：04:22:33" itemprop="dateCreated datePublished" datetime="2019-10-11T11:04:17+00:00">2019-10-11</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-11 04:22:33" itemprop="dateModified" datetime="2019-10-11T04:22:33+00:00">2019-10-11</time>
-              </span>
             
           
 
@@ -260,32 +251,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="禁止使用System-out-print"><a href="#禁止使用System-out-print" class="headerlink" title="禁止使用System.out.print"></a>禁止使用System.out.print</h2><p>不要在代码上直接使用System.out或System.err 输出日志    </p><pre><code>System.out.println(&quot;--&gt; begin call sap finish service&quot;);
-System.out.println(&quot;--&gt; call sap finish service status {}&quot;+vo.getStatus());</code></pre><h2 id="统一使用-SLFJ"><a href="#统一使用-SLFJ" class="headerlink" title="统一使用 SLFJ"></a>统一使用 SLFJ</h2><p>我们在使用日志输出的时候，会考虑到以后会更换日志的实现，就如我们原来是用log4j，后来更换为log4j2，使用SLFJ，可以让我们的代码不用变更就能更换日志的框架。</p><a id="more"></a>
-
-<pre><code>import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-***JAVA代码****
-private static Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在网上看到过很多关于mysql联合索引最左前缀匹配的文章，自以为就了解了其原理，最近面试时和面试官交流，发现遗漏了些东西，这里自己整理一下这方面的内容。</p><h2 id="最左前缀匹配原则"><a href="#最左前缀匹配原则" class="headerlink" title="最左前缀匹配原则"></a>最左前缀匹配原则</h2><p>在mysql建立联合索引时会遵循最左前缀匹配的原则，即最左优先，在检索数据时从联合索引的最左边开始匹配，示例：<br>对列col1、列col2和列col3建一个联合索引</p><p>KEY test_col1_col2_col3 on test(col1,col2,col3);<br>联合索引 test_col1_col2_col3 实际建立了(col1)、(col1,col2)、(col,col2,col3)三个索引。</p><p>SELECT * FROM test WHERE col1=“1” AND clo2=“2” AND clo4=“4”<br>上面这个查询语句执行时会依照最左前缀匹配原则，检索时会使用索引(col1,col2)进行数据匹配。</p><a id="more"></a>
 
 
-***JAVA代码****
-LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="日志格式"><a href="#日志格式" class="headerlink" title="日志格式"></a>日志格式</h2><p>日志输出采用key，value的形式记录日志，key统一为大写，例如EVENT。EVENT记录的是，事件名称，为了方便后面定位问题，排错问题。key可以自行扩展，例如ORDER_ID=abc123456。</p>
-<pre><code>log.info(String.format(&quot;EVENT=SAP采购订单序列化|CONTENT=%s&quot;, ToStringBuilder.reflectionToString(sapOrderList)));</code></pre><h2 id="采用MDC标注日志上下文"><a href="#采用MDC标注日志上下文" class="headerlink" title="采用MDC标注日志上下文"></a>采用MDC标注日志上下文</h2><p>MDC（Mapped Diagnostic Context，映射调试上下文）为了方便在多线程条件下记录日志的功能。当我们采用多线程的方式来处理用户的请求日志都打印在同一个文件上，比较难以区分不同请求下所对应的日志。当需要追踪某个用户在系统中的相关日志记录时，就会变得很麻烦。<br>使用MDC就是采用ThreadLocal的方式，给每一个线程一个mdcId，记录该线程下所有操作。</p>
-<pre><code>import org.slf4j.MDC;
 
-***java代码***
-MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;));
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>索引的字段可以是任意顺序的，如：</p>
+<p>SELECT * FROM test WHERE col1=“1” AND clo2=“2”<br>SELECT * FROM test WHERE col2=“2” AND clo1=“1”<br>这两个查询语句都会用到索引(col1,col2)，mysql创建联合索引的规则是首先会对联合合索引的最左边的，也就是第一个字段col1的数据进行排序，在第一个字段的排序基础上，然后再对后面第二个字段col2进行排序。其实就相当于实现了类似 order by col1 col2这样一种排序规则。</p>
+<p>有人会疑惑第二个查询语句不符合最左前缀匹配：首先可以肯定是两个查询语句都保函索引(col1,col2)中的col1、col2两个字段，只是顺序不一样，查询条件一样，最后所查询的结果肯定是一样的。既然结果是一样的，到底以何种顺序的查询方式最好呢？此时我们可以借助mysql查询优化器explain，explain会纠正sql语句该以什么样的顺序执行效率最高，最后才生成真正的执行计划。</p>
+<h2 id="为什么要使用联合索引"><a href="#为什么要使用联合索引" class="headerlink" title="为什么要使用联合索引"></a>为什么要使用联合索引</h2><ul>
+<li>减少开销。建一个联合索引(col1,col2,col3)，实际相当于建了(col1),(col1,col2),(col1,col2,col3)三个索引。每多一个索引，都会增加写操作的开销和磁盘空间的开销。对于大量数据的表，使用联合索引会大大的减少开销！</li>
+<li>覆盖索引。对联合索引(col1,col2,col3)，如果有如下的sql: select col1,col2,col3 from test where col1=1 and col2=2。那么MySQL可以直接通过遍历索引取得数据，而无需回表，这减少了很多的随机io操作。减少io操作，特别的随机io其实是dba主要的优化策略。所以，在真正的实际应用中，覆盖索引是主要的提升性能的优化手段之一。</li>
+<li>效率高。索引列越多，通过索引筛选出的数据越少。有1000W条数据的表，有如下sql:select from table where col1=1 and col2=2 and col3=3,假设假设每个条件可以筛选出10%的数据，如果只有单值索引，那么通过该索引能筛选出1000W10%=100w条数据，然后再回表从100w条数据中找到符合col2=2 and col3= 3的数据，然后再排序，再分页；如果是联合索引，通过索引筛选出1000w10% 10% *10%=1w，效率提升可想而知！</li>
+</ul>
+<h2 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h2><p>对于联合索引(col1,col2,col3)，查询语句SELECT * FROM test WHERE col2=2;是否能够触发索引？<br>大多数人都会说NO，实际上却是YES。<br>原因：</p>
+<p>EXPLAIN SELECT * FROM test WHERE col2=2;<br>EXPLAIN SELECT * FROM test WHERE col1=1;<br>观察上述两个explain结果中的type字段。查询中分别是：</p>
+<p>type: index<br>type: ref<br>index：这种类型表示mysql会对整个该索引进行扫描。要想用到这种类型的索引，对这个索引并无特别要求，只要是索引，或者某个联合索引的一部分，mysql都可能会采用index类型的方式扫描。但是呢，缺点是效率不高，mysql会从索引中的第一个数据一个个的查找到最后一个数据，直到找到符合判断条件的某个索引。所以，上述语句会触发索引。<br>ref：这种类型表示mysql会根据特定的算法快速查找到某个符合条件的索引，而不是会对索引中每一个数据都进行一一的扫描判断，也就是所谓你平常理解的使用索引查询会更快的取出数据。而要想实现这种查找，索引却是有要求的，要实现这种能快速查找的算法，索引就要满足特定的数据结构。简单说，也就是索引字段的数据必须是有序的，才能实现这种类型的查找，才能利用到索引。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上所述是小编给大家介绍的Mysql联合索引最左匹配原则，希望对大家有所帮助，如果大家有任何疑问请给我留言，小编会及时回复大家的。在此也非常感谢大家对脚本之家网站的支持！</p>
 
-***日志输出格式***
-&lt;Property name=&quot;PATTERN_FORMAT&quot;&gt;%d{DEFAULT} [%thread:%X{mdc-uuid}] %-5level %logger{36} - %msg%n&lt;/Property&gt;
-&lt;/Properties&gt;</code></pre><h2 id="不要在日志里面做字符串拼接"><a href="#不要在日志里面做字符串拼接" class="headerlink" title="不要在日志里面做字符串拼接"></a>不要在日志里面做字符串拼接</h2><p>采用字符串拼接的方式，其实不利于代码的可读性和可维护性，建议通过占位符的方式输入日志。</p>
-<h2 id="保证日志输出的时候，不会出现异常"><a href="#保证日志输出的时候，不会出现异常" class="headerlink" title="保证日志输出的时候，不会出现异常"></a>保证日志输出的时候，不会出现异常</h2><p>其实不仅仅是日志的输出，我们在日常写代码的时候，也要注意不要输入异常。但是如果在日志的输出的地方造成异常，会导致日志的输出失败，而且没有相关的错误信息，会让排查错误造成困难。如下面的代码，如果vo为空，这个日志就会抛空指针异常。</p>
-<pre><code>LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="异常的输出，必须打印堆栈信息"><a href="#异常的输出，必须打印堆栈信息" class="headerlink" title="异常的输出，必须打印堆栈信息"></a>异常的输出，必须打印堆栈信息</h2><p>捕获到异常后，不能使用e.printStackTrace()，而是通过log error日志输出异常的所有的堆栈。</p>
-<pre><code>} catch (Exception e) {
-    LOGGER.error(&quot;EVENT=SAP采购订单序列化异常&quot;,e);     
-}</code></pre>
     </div>
 
     
@@ -295,30 +277,21 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/开发管理/" rel="tag"># 开发管理</a>
-            
-          </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
+                <a href="/2019/10/11/Mysql事务隔离级别/" rel="next" title="Mysql事务隔离级别">
+                  <i class="fa fa-chevron-left"></i> Mysql事务隔离级别
+                </a>
+              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/09/25/Spring/" rel="prev" title="Spring提供的事件驱动模型(观察者模式)">
-                  Spring提供的事件驱动模型(观察者模式) <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -370,7 +343,7 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁止使用System-out-print"><span class="nav-number">1.</span> <span class="nav-text">禁止使用System.out.print</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统一使用-SLFJ"><span class="nav-number">2.</span> <span class="nav-text">统一使用 SLFJ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志格式"><span class="nav-number">3.</span> <span class="nav-text">日志格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#采用MDC标注日志上下文"><span class="nav-number">4.</span> <span class="nav-text">采用MDC标注日志上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要在日志里面做字符串拼接"><span class="nav-number">5.</span> <span class="nav-text">不要在日志里面做字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保证日志输出的时候，不会出现异常"><span class="nav-number">6.</span> <span class="nav-text">保证日志输出的时候，不会出现异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常的输出，必须打印堆栈信息"><span class="nav-number">7.</span> <span class="nav-text">异常的输出，必须打印堆栈信息</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最左前缀匹配原则"><span class="nav-number">2.</span> <span class="nav-text">最左前缀匹配原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要使用联合索引"><span class="nav-number">4.</span> <span class="nav-text">为什么要使用联合索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引申"><span class="nav-number">5.</span> <span class="nav-text">引申</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -494,7 +467,7 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
       repo: 'blog-comment',
       owner: 'hzy2009',
       admin: ['hzy2009'],
-      id: 'e0b9f1e7670195fa681205114eda076a',
+      id: '4e46fc98725d2dcd8b672b5b760f75ea',
         language: 'zh-CN',
       
       distractionFreeMode: 'true'
