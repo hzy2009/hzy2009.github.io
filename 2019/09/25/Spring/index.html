@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-sunset.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-sunset.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-sunset.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo-sunset.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
+<meta name="keywords" content="Spring 观察者模式 事件驱动模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring提供的事件驱动模型(观察者模式)">
+<meta property="og:url" content="http://yoursite.com/2019/09/25/Spring/index.html">
+<meta property="og:site_name" content="志泳的博客-学习、分享、成长">
+<meta property="og:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
+<meta property="og:updated_time" content="2019-10-20T08:01:47.310Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring提供的事件驱动模型(观察者模式)">
+<meta name="twitter:description" content="事件驱动模型事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点： 首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者 当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变 观察者如何处理，目标无需干涉，所以就降低耦合度 用户注册的例子游戏用户注册成功后，可能会发生这么多事 加积分 发确认邮件 获得游戏大礼包 问题Use">
+<meta name="twitter:image" content="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
+  <link rel="canonical" href="http://yoursite.com/2019/09/25/Spring/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Spring提供的事件驱动模型(观察者模式) | 志泳的博客-学习、分享、成长</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?aff336890e85bc8e76e40e879cca6bf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志泳的博客-学习、分享、成长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/Spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jimmy Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志泳的博客-学习、分享、成长">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Spring提供的事件驱动模型(观察者模式)
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-25 10:13:24" itemprop="dateCreated datePublished" datetime="2019-09-25T10:13:24+00:00">2019-09-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-20 08:01:47" itemprop="dateModified" datetime="2019-10-20T08:01:47+00:00">2019-10-20</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>事件驱动模型也就是我们常说的观察者模式，或者发布-订阅模型，理解它的几个关键点：</p><ul>
+<li>首先是一种对象间的一对多关系，比如微信和微信公众号的关系，微信是观察者，微信公众号是被观擦者</li>
+<li>当目标(微信公众号)发生改变，观察者(微信用户)可以接收到改变</li>
+<li>观察者如何处理，目标无需干涉，所以就降低耦合度</li>
+</ul><h2 id="用户注册的例子"><a href="#用户注册的例子" class="headerlink" title="用户注册的例子"></a>用户注册的例子</h2><p>游戏用户注册成功后，可能会发生这么多事</p><ul>
+<li>加积分</li>
+<li>发确认邮件</li>
+<li>获得游戏大礼包</li>
+</ul><p><strong><em>问题</em></strong><br>UserServiceImple类里需要引用创建积分的service，确认邮件的service等，耦合严重，增删功能比较麻烦，也有可能需要调用第三方接口，速度慢，代码维护性差，同时访问数据库多次，用户体验差。    </p><a id="more"></a>
+
+
+
+
+<p>从以上例子可以看出应该使用一个观察者来解耦service里的依赖关系增加一个Lisyener来解耦UserService和其他功能，即注册成功后，只需要通知相关监听器，不需要关系它们如何处理，一个接口只完成一个功能，增删功能非常容易。  </p>
+<p>首先看下Spring提供的事件驱动模型体系图</p>
+<img src="http://www.plantuml.com/plantuml/svg/SomeoCbCJYp9pCzJiAdHrLLmH0Wuv-ULf5QKk9QbvfKeSE6I0Ek2YWIN91QLfAQ09OZKa5z0YdhddFnYKjG7fQOLfHPdGBK00000">
+
+<h2 id="事件代表者：ApplicationEvent"><a href="#事件代表者：ApplicationEvent" class="headerlink" title="事件代表者：ApplicationEvent"></a>事件代表者：ApplicationEvent</h2><p>系统默认提供了如下ApplicationEvent事件实现<br>只有一个ApplicationContextEvent，表示ApplicationContext容器事件，有如下实现</p>
+<ul>
+<li>ContextStantedEvent:ApplicationContext启动后触发的事件  </li>
+<li>ContextStoppedEvent:ApplicationContext停止后触发的事件</li>
+<li>ContextRefresheEvent:ApplicationContext初始化或者刷新完成后触发的事件</li>
+<li>ContextClosedEvent:ApplicationContext关闭后触发的事件</li>
+</ul>
+<h2 id="事件发布者：ApplicationEventPublisher"><a href="#事件发布者：ApplicationEventPublisher" class="headerlink" title="事件发布者：ApplicationEventPublisher"></a>事件发布者：ApplicationEventPublisher</h2><p>ApplicationContext接口继承了ApplicationEventPublisher，并在AbstractApplicationContext实现了具体代码，实际执行委托给了ApplicationEventMulicaster。源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">protected void publishEvent(Object event, @Nullable ResolvableType eventType) &#123;</span><br><span class="line">	Assert.notNull(event, &quot;Event must not be null&quot;);</span><br><span class="line"></span><br><span class="line">	// Decorate event as an ApplicationEvent if necessary</span><br><span class="line">	ApplicationEvent applicationEvent;</span><br><span class="line">	if (event instanceof ApplicationEvent) &#123;</span><br><span class="line">		applicationEvent = (ApplicationEvent) event;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		applicationEvent = new PayloadApplicationEvent&lt;&gt;(this, event);</span><br><span class="line">		if (eventType == null) &#123;</span><br><span class="line">			eventType = ((PayloadApplicationEvent&lt;?&gt;) applicationEvent).getResolvableType();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Multicast right now if possible - or lazily once the multicaster is initialized</span><br><span class="line">	if (this.earlyApplicationEvents != null) &#123;</span><br><span class="line">		this.earlyApplicationEvents.add(applicationEvent);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// Publish event via parent context as well...</span><br><span class="line">	if (this.parent != null) &#123;</span><br><span class="line">		if (this.parent instanceof AbstractApplicationContext) &#123;</span><br><span class="line">			((AbstractApplicationContext) this.parent).publishEvent(event, eventType);</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			this.parent.publishEvent(event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们常用的ApplicationContext都继承自AbstractApplicationContext，如ClassPathXmlApplicationContext、XmlWebApplicationContext等。ApplicationContext自动到容器找一个名为ApplicationEventMulticaster实现，如果没有自己new一个SimpleApplicationEventMulticaster,其中SimpleApplicationEventMulticaster的源码可以看出，spring默认的事件处理方式是并行处理，根据事件的泛型类型，找到对应的Listener，并且使用线程池给给每个Listener分配线程处理。发布事件源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void multicastEvent(final ApplicationEvent event, @Nullable ResolvableType eventType) &#123;</span><br><span class="line">	ResolvableType type = (eventType != null ? eventType : resolveDefaultEventType(event));</span><br><span class="line">	for (final ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type)) &#123;</span><br><span class="line">		Executor executor = getTaskExecutor();</span><br><span class="line">		if (executor != null) &#123;</span><br><span class="line">			executor.execute(() -&gt; invokeListener(listener, event));</span><br><span class="line">		&#125;</span><br><span class="line">		else &#123;</span><br><span class="line">			invokeListener(listener, event);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件监听者-处理者-ApplicationListener"><a href="#事件监听者-处理者-ApplicationListener" class="headerlink" title="事件监听者(处理者):ApplicationListener"></a>事件监听者(处理者):ApplicationListener</h2><p>ApplicationListener 提供 onApplicationEvent方法，我们只需要实现该接口，并指定我们需要的处理的事件。并把改类放到spring容器管理。如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component </span><br><span class="line">public class EditReceiveOwnQuantityAfterBackOrder implements ApplicationListener&lt;OrderBackEvent&gt; &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void onApplicationEvent(OrderBackEvent event) &#123;</span><br><span class="line">		// 业务代码</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Spring-观察者模式-事件驱动模型/" rel="tag"># Spring 观察者模式 事件驱动模型</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/25/开发管理-日志规范/" rel="next" title="开发管理-日志规范">
+                  <i class="fa fa-chevron-left"></i> 开发管理-日志规范
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/26/手写一个永不重复的发号机/" rel="prev" title="手写一个规则可配置的高并发的发号机">
+                  手写一个规则可配置的高并发的发号机 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件驱动模型"><span class="nav-number">1.</span> <span class="nav-text">事件驱动模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户注册的例子"><span class="nav-number">2.</span> <span class="nav-text">用户注册的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件代表者：ApplicationEvent"><span class="nav-number">3.</span> <span class="nav-text">事件代表者：ApplicationEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件发布者：ApplicationEventPublisher"><span class="nav-number">4.</span> <span class="nav-text">事件发布者：ApplicationEventPublisher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件监听者-处理者-ApplicationListener"><span class="nav-number">5.</span> <span class="nav-text">事件监听者(处理者):ApplicationListener</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jimmy Wong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jimmy Wong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1e03a8c2c942a007aa2d',
+      clientSecret: 'c13db1d348fcbb2f0151ed1472c95119b9b34445',
+      repo: 'blog-comment',
+      owner: 'hzy2009',
+      admin: ['hzy2009'],
+      id: '4303bc8fc77c396b482f631acd2d3ddb',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>

@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
-<meta name="keywords" content="开发管理">
+  <meta name="description" content="给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。  我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。  如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。  示例 1:123456输入: nums = [1, 7, 3, 6, 5, 6]输出: 3解释: 索引3 (num">
+<meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发管理-日志规范">
-<meta property="og:url" content="http://yoursite.com/2019/09/25/开发管理-日志规范/index.html">
+<meta property="og:title" content="数组-寻找数组的中心索引">
+<meta property="og:url" content="http://yoursite.com/2019/10/08/数组-寻找数组的中心索引/index.html">
 <meta property="og:site_name" content="志泳的博客-学习、分享、成长">
-<meta property="og:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
+<meta property="og:description" content="给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。  我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。  如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。  示例 1:123456输入: nums = [1, 7, 3, 6, 5, 6]输出: 3解释: 索引3 (num">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-20T08:01:47.310Z">
+<meta property="og:updated_time" content="2019-10-20T08:01:47.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开发管理-日志规范">
-<meta name="twitter:description" content="禁止使用System.out.print不要在代码上直接使用System.out或System.err 输出日志    System.out.println(&amp;quot;--&amp;gt; begin call sap finish service&amp;quot;); System.out.println(&amp;quot;--&amp;gt; call sap finish service status {}&amp;quot">
-  <link rel="canonical" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
+<meta name="twitter:title" content="数组-寻找数组的中心索引">
+<meta name="twitter:description" content="给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。  我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。  如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。  示例 1:123456输入: nums = [1, 7, 3, 6, 5, 6]输出: 3解释: 索引3 (num">
+  <link rel="canonical" href="http://yoursite.com/2019/10/08/数组-寻找数组的中心索引/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>开发管理-日志规范 | 志泳的博客-学习、分享、成长</title>
+  <title>数组-寻找数组的中心索引 | 志泳的博客-学习、分享、成长</title>
   
 
 
@@ -205,7 +205,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/25/开发管理-日志规范/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/数组-寻找数组的中心索引/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jimmy Wong">
@@ -217,7 +217,7 @@
       <meta itemprop="name" content="志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">开发管理-日志规范
+        <h1 class="post-title" itemprop="name headline">数组-寻找数组的中心索引
 
           
         </h1>
@@ -233,7 +233,7 @@
                 
               
 
-              <time title="创建时间：2019-09-25 09:50:53" itemprop="dateCreated datePublished" datetime="2019-09-25T09:50:53+00:00">2019-09-25</time>
+              <time title="创建时间：2019-10-08 17:54:35" itemprop="dateCreated datePublished" datetime="2019-10-08T17:54:35+00:00">2019-10-08</time>
             </span>
           
             
@@ -260,32 +260,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="禁止使用System-out-print"><a href="#禁止使用System-out-print" class="headerlink" title="禁止使用System.out.print"></a>禁止使用System.out.print</h2><p>不要在代码上直接使用System.out或System.err 输出日志    </p><pre><code>System.out.println(&quot;--&gt; begin call sap finish service&quot;);
-System.out.println(&quot;--&gt; call sap finish service status {}&quot;+vo.getStatus());</code></pre><h2 id="统一使用-SLFJ"><a href="#统一使用-SLFJ" class="headerlink" title="统一使用 SLFJ"></a>统一使用 SLFJ</h2><p>我们在使用日志输出的时候，会考虑到以后会更换日志的实现，就如我们原来是用log4j，后来更换为log4j2，使用SLFJ，可以让我们的代码不用变更就能更换日志的框架。</p><a id="more"></a>
-
-<pre><code>import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-***JAVA代码****
-private static Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+        <p>给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。  </p><p>我们是这样定义数组中心索引的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。  </p><p>如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。  </p><p>示例 1:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出: 3</span><br><span class="line">解释: </span><br><span class="line">索引3 (nums[3] = 6) 的左侧数之和(1 + 7 + 3 = 11)，与右侧数之和(5 + 6 = 11)相等。</span><br><span class="line">同时, 3 也是第一个符合要求的中心索引。</span><br></pre></td></tr></table></figure><p>示例 2:  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">nums = [1, 2, 3]</span><br><span class="line">输出: -1</span><br><span class="line">解释: </span><br><span class="line">数组中不存在满足此条件的中心索引。</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
-***JAVA代码****
-LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="日志格式"><a href="#日志格式" class="headerlink" title="日志格式"></a>日志格式</h2><p>日志输出采用key，value的形式记录日志，key统一为大写，例如EVENT。EVENT记录的是，事件名称，为了方便后面定位问题，排错问题。key可以自行扩展，例如ORDER_ID=abc123456。</p>
-<pre><code>log.info(String.format(&quot;EVENT=SAP采购订单序列化|CONTENT=%s&quot;, ToStringBuilder.reflectionToString(sapOrderList)));</code></pre><h2 id="采用MDC标注日志上下文"><a href="#采用MDC标注日志上下文" class="headerlink" title="采用MDC标注日志上下文"></a>采用MDC标注日志上下文</h2><p>MDC（Mapped Diagnostic Context，映射调试上下文）为了方便在多线程条件下记录日志的功能。当我们采用多线程的方式来处理用户的请求日志都打印在同一个文件上，比较难以区分不同请求下所对应的日志。当需要追踪某个用户在系统中的相关日志记录时，就会变得很麻烦。<br>使用MDC就是采用ThreadLocal的方式，给每一个线程一个mdcId，记录该线程下所有操作。</p>
-<pre><code>import org.slf4j.MDC;
 
-***java代码***
-MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;));
 
-***日志输出格式***
-&lt;Property name=&quot;PATTERN_FORMAT&quot;&gt;%d{DEFAULT} [%thread:%X{mdc-uuid}] %-5level %logger{36} - %msg%n&lt;/Property&gt;
-&lt;/Properties&gt;</code></pre><h2 id="不要在日志里面做字符串拼接"><a href="#不要在日志里面做字符串拼接" class="headerlink" title="不要在日志里面做字符串拼接"></a>不要在日志里面做字符串拼接</h2><p>采用字符串拼接的方式，其实不利于代码的可读性和可维护性，建议通过占位符的方式输入日志。</p>
-<h2 id="保证日志输出的时候，不会出现异常"><a href="#保证日志输出的时候，不会出现异常" class="headerlink" title="保证日志输出的时候，不会出现异常"></a>保证日志输出的时候，不会出现异常</h2><p>其实不仅仅是日志的输出，我们在日常写代码的时候，也要注意不要输入异常。但是如果在日志的输出的地方造成异常，会导致日志的输出失败，而且没有相关的错误信息，会让排查错误造成困难。如下面的代码，如果vo为空，这个日志就会抛空指针异常。</p>
-<pre><code>LOGGER.info(&quot;--&gt; call sap finish service status {}&quot;, vo.getStatus());</code></pre><h2 id="异常的输出，必须打印堆栈信息"><a href="#异常的输出，必须打印堆栈信息" class="headerlink" title="异常的输出，必须打印堆栈信息"></a>异常的输出，必须打印堆栈信息</h2><p>捕获到异常后，不能使用e.printStackTrace()，而是通过log error日志输出异常的所有的堆栈。</p>
-<pre><code>} catch (Exception e) {
-    LOGGER.error(&quot;EVENT=SAP采购订单序列化异常&quot;,e);     
-}</code></pre>
+
+
+
+
+<p>说明:  </p>
+<ul>
+<li>nums 的长度范围为 [0, 10000]。</li>
+<li>任何一个 nums[i] 将会是一个范围在 [-1000, 1000]的整数。</li>
+</ul>
+<p>我的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int pivotIndex(int[] nums) &#123;</span><br><span class="line">        int leftSum = 0;</span><br><span class="line">        int rightSum = 0;</span><br><span class="line">        </span><br><span class="line">        int middleIndex = nums.length /2;</span><br><span class="line">        </span><br><span class="line">        for(int i=0; i&lt;nums.lenght; i++)&#123;</span><br><span class="line">            if( i !=  middleIndex)&#123;</span><br><span class="line">                leftSum = leftSum + num[i];</span><br><span class="line">                rightSum = rightSum + num[nums.lenght - i + 1];</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            if(leftSum == rightSum)&#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -300,7 +292,7 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
           
           <div class="post-tags">
             
-              <a href="/tags/开发管理/" rel="tag"># 开发管理</a>
+              <a href="/tags/数据结构与算法/" rel="tag"># 数据结构与算法</a>
             
           </div>
         
@@ -310,14 +302,18 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
+                <a href="/2019/10/08/广度优先搜索-刷题-岛屿数量/" rel="next" title="leetcode刷题-广度优先搜索-岛屿数量">
+                  <i class="fa fa-chevron-left"></i> leetcode刷题-广度优先搜索-岛屿数量
+                </a>
+              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/25/Spring/" rel="prev" title="Spring提供的事件驱动模型(观察者模式)">
-                  Spring提供的事件驱动模型(观察者模式) <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/10/决定协同软件成败的关键因素/" rel="prev" title="决定协同软件成败的关键因素">
+                  决定协同软件成败的关键因素 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -370,8 +366,6 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁止使用System-out-print"><span class="nav-number">1.</span> <span class="nav-text">禁止使用System.out.print</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统一使用-SLFJ"><span class="nav-number">2.</span> <span class="nav-text">统一使用 SLFJ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志格式"><span class="nav-number">3.</span> <span class="nav-text">日志格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#采用MDC标注日志上下文"><span class="nav-number">4.</span> <span class="nav-text">采用MDC标注日志上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不要在日志里面做字符串拼接"><span class="nav-number">5.</span> <span class="nav-text">不要在日志里面做字符串拼接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保证日志输出的时候，不会出现异常"><span class="nav-number">6.</span> <span class="nav-text">保证日志输出的时候，不会出现异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常的输出，必须打印堆栈信息"><span class="nav-number">7.</span> <span class="nav-text">异常的输出，必须打印堆栈信息</span></a></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
@@ -494,7 +488,7 @@ MDC.put(&quot;mdc-uuid&quot;, UUID.randomUUID().toString().replaceAll(&quot;-&qu
       repo: 'blog-comment',
       owner: 'hzy2009',
       admin: ['hzy2009'],
-      id: 'e0b9f1e7670195fa681205114eda076a',
+      id: 'ca167afc6755a0bccdbf71d9e1582637',
         language: 'zh-CN',
       
       distractionFreeMode: 'true'
