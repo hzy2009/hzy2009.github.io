@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-sunset.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-sunset.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-sunset.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo-sunset.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="近期研究docker，同时也有同事在问，如何使用docker搭建redis集群，我自己也实践下，本机环境是： 操作系统:macOS 10.15 docker:18.09.2 redis:5.0.5 为了能够顺利地使用docker来部署redis集群，我首先本地做redis集群，确保集群的方式是对的，再来到docker上面做redis的集群。本地做Redis集群本地做redis集群，也是分几个小的步">
+<meta name="keywords" content="技术分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用docker创建redis集群">
+<meta property="og:url" content="http://yoursite.com/2019/10/23/使用docker创建redis集群/index.html">
+<meta property="og:site_name" content="志泳的博客-学习、分享、成长">
+<meta property="og:description" content="近期研究docker，同时也有同事在问，如何使用docker搭建redis集群，我自己也实践下，本机环境是： 操作系统:macOS 10.15 docker:18.09.2 redis:5.0.5 为了能够顺利地使用docker来部署redis集群，我首先本地做redis集群，确保集群的方式是对的，再来到docker上面做redis的集群。本地做Redis集群本地做redis集群，也是分几个小的步">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-23T15:28:02.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用docker创建redis集群">
+<meta name="twitter:description" content="近期研究docker，同时也有同事在问，如何使用docker搭建redis集群，我自己也实践下，本机环境是： 操作系统:macOS 10.15 docker:18.09.2 redis:5.0.5 为了能够顺利地使用docker来部署redis集群，我首先本地做redis集群，确保集群的方式是对的，再来到docker上面做redis的集群。本地做Redis集群本地做redis集群，也是分几个小的步">
+  <link rel="canonical" href="http://yoursite.com/2019/10/23/使用docker创建redis集群/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>使用docker创建redis集群 | 志泳的博客-学习、分享、成长</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?aff336890e85bc8e76e40e879cca6bf8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">志泳的博客-学习、分享、成长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/23/使用docker创建redis集群/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jimmy Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="志泳的博客-学习、分享、成长">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">使用docker创建redis集群
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-23 16:51:05 / 修改时间：15:28:02" itemprop="dateCreated datePublished" datetime="2019-10-23T16:51:05+00:00">2019-10-23</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>近期研究docker，同时也有同事在问，如何使用docker搭建redis集群，我自己也实践下，本机环境是：</p><ul>
+<li>操作系统:macOS 10.15</li>
+<li>docker:18.09.2</li>
+<li>redis:5.0.5</li>
+</ul><p>为了能够顺利地使用docker来部署redis集群，我首先本地做redis集群，确保集群的方式是对的，再来到docker上面做redis的集群。</p><h1 id="本地做Redis集群"><a href="#本地做Redis集群" class="headerlink" title="本地做Redis集群"></a>本地做Redis集群</h1><p>本地做redis集群，也是分几个小的步骤，首先配置6个不同redis文件，用于做3个master 3个slaver的集群，然后启动redis server分别启动这个6个redis，最后使用创建集群。</p><h2 id="配置redis文件"><a href="#配置redis文件" class="headerlink" title="配置redis文件"></a>配置redis文件</h2><ul>
+<li>首先在任意目录下，创建一个redis配置文件的模板 redis.conf，用于配置redis开启集群模式，代码如下：</li>
+</ul><a id="more"></a>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 端口</span><br><span class="line">port 7000</span><br><span class="line"></span><br><span class="line">后台运行</span><br><span class="line">daemonize yes</span><br><span class="line"></span><br><span class="line"># 是否启用redis集群模式</span><br><span class="line">cluster-enabled yes</span><br><span class="line"></span><br><span class="line"># 请注意，尽管这个选项的名称，但它不是一个用户可编辑的配置文件，</span><br><span class="line"># 但是Redis集群节点所在的文件在每次发生更改时自动保持集群配</span><br><span class="line"># 置(基本上是状态)，以便能够在启动时重新读取它。该文件列出了</span><br><span class="line"># 集群中的其他节点、它们的状态、持久变量等等。由于接收到一些</span><br><span class="line"># 消息，这个文件常常被重写并刷新到磁盘上。</span><br><span class="line">cluster-config-file nodes.conf</span><br><span class="line"></span><br><span class="line"># Redis集群节点不可用的最长时间，而不会被认为是失败的。如果</span><br><span class="line"># 一个主节点的访问时间超过了指定的时间量，则它的从节点将进行</span><br><span class="line"># 故障转移。该参数控制Redis集群中的其他重要内容。值得注意的</span><br><span class="line"># 是，在指定的时间内不能到达大多数主节点的节点将停止接受查询。</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line"></span><br><span class="line"># 开启AOF</span><br><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>建立6个redis配置文件夹，分别用6个不同端口号命名，7000-7005，操作如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir cluster-test</span><br><span class="line">cd cluster-test</span><br><span class="line">mkdir 7000 7001 7002 7003 7004 7005</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将模板文件，复制到创建的6个目录下，并且修改模板文件把端口号，改成跟目录一样，把6379，改成7000(获取其他端口)</li>
+</ul>
+<h2 id="启动redis-server"><a href="#启动redis-server" class="headerlink" title="启动redis server"></a>启动redis server</h2><p>配置文件准备好之后，我们就可以逐一的启动这个redis，类似如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 7000</span><br><span class="line">../redis-server ./redis.conf</span><br></pre></td></tr></table></figure>
+
+<p>从每个实例的日志中可以看到，由于不存在nodes.conf文件，每个节点都为自己分配一个新ID，如下。同时会新增文件，appendonly.aof    nodes.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[82462] 26 Nov 11:56:55.329 * No cluster configuration found, I&apos;m 97a3a64667477371c4479320d683e4c8db5858b1</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行redis-cli-创建集群"><a href="#执行redis-cli-创建集群" class="headerlink" title="执行redis-cli 创建集群"></a>执行redis-cli 创建集群</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 \</span><br><span class="line">127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 \</span><br><span class="line">--cluster-replicas 1</span><br></pre></td></tr></table></figure>
+
+<p>执行结束后，如果一切配置，在日志的最后，会出现类似日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[OK] All 16384 slots covered</span><br></pre></td></tr></table></figure>
+
+<h2 id="执行-redis-cli-c-p-来校验集群是否成功"><a href="#执行-redis-cli-c-p-来校验集群是否成功" class="headerlink" title="执行 redis-cli -c -p 来校验集群是否成功"></a>执行 redis-cli -c -p 来校验集群是否成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ redis-cli -c -p 7000</span><br><span class="line">redis 127.0.0.1:7000&gt; set foo bar</span><br><span class="line">-&gt; Redirected to slot [12182] located at 127.0.0.1:7002</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:7002&gt; set hello world</span><br><span class="line">-&gt; Redirected to slot [866] located at 127.0.0.1:7000</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:7000&gt; get foo</span><br><span class="line">-&gt; Redirected to slot [12182] located at 127.0.0.1:7002</span><br><span class="line">&quot;bar&quot;</span><br><span class="line">redis 127.0.0.1:7000&gt; get hello</span><br><span class="line">-&gt; Redirected to slot [866] located at 127.0.0.1:7000</span><br><span class="line">&quot;world&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用docker做Redis集群"><a href="#使用docker做Redis集群" class="headerlink" title="使用docker做Redis集群"></a>使用docker做Redis集群</h1><p>如果上述在本地上创建集群都能成功执行。那么把集群的操作放到docker上面而已。</p>
+<h2 id="使用docker拉取最新的redis镜像"><a href="#使用docker拉取最新的redis镜像" class="headerlink" title="使用docker拉取最新的redis镜像"></a>使用docker拉取最新的redis镜像</h2><ul>
+<li>在Docker Hub上查找redis镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost ~ % docker search redis</span><br><span class="line">NAME                             DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">redis                            Redis is an open source key-value store that…   7430                [OK]</span><br><span class="line">bitnami/redis                    Bitnami Redis Docker Image                      129                                     [OK]</span><br><span class="line">sameersbn/redis                                                                  77                                      [OK]</span><br><span class="line">grokzen/redis-cluster            Redis cluster 3.0, 3.2, 4.0 &amp; 5.0               61</span><br><span class="line">rediscommander/redis-commander   Alpine image for redis-commander - Redis man…   31                                      [OK]</span><br><span class="line">kubeguide/redis-master           redis-master with &quot;Hello World!&quot;                30</span><br><span class="line">redislabs/redis                  Clustered in-memory database engine compatib…   23</span><br><span class="line">oliver006/redis_exporter          Prometheus Exporter for Redis Metrics. Supp…   18</span><br><span class="line">arm32v7/redis                    Redis is an open source key-value store that…   17</span><br><span class="line">redislabs/redisearch             Redis With the RedisSearch module pre-loaded…   17</span><br><span class="line">webhippie/redis                  Docker images for Redis                         10                                      [OK]</span><br><span class="line">s7anley/redis-sentinel-docker    Redis Sentinel                                  9                                       [OK]</span><br><span class="line">redislabs/redisgraph             A graph database module for Redis               8                                       [OK]</span><br><span class="line">insready/redis-stat              Docker image for the real-time Redis monitor…   8                                       [OK]</span><br><span class="line">bitnami/redis-sentinel           Bitnami Docker Image for Redis Sentinel         8                                       [OK]</span><br><span class="line">arm64v8/redis                    Redis is an open source key-value store that…   6</span><br><span class="line">redislabs/redismod               An automated build of redismod - latest Redi…   5                                       [OK]</span><br><span class="line">centos/redis-32-centos7          Redis in-memory data structure store, used a…   4</span><br><span class="line">circleci/redis                   CircleCI images for Redis                       2                                       [OK]</span><br><span class="line">frodenas/redis                   A Docker Image for Redis                        2                                       [OK]</span><br><span class="line">runnable/redis-stunnel           stunnel to redis provided by linking contain…   1                                       [OK]</span><br><span class="line">tiredofit/redis                  Redis Server w/ Zabbix monitoring and S6 Ove…   1                                       [OK]</span><br><span class="line">wodby/redis                      Redis container image with orchestration        1                                       [OK]</span><br><span class="line">cflondonservices/redis           Docker image for running redis                  0</span><br><span class="line">xetamus/redis-resource           forked redis-resource                           0                                       [OK]</span><br><span class="line">hzy@localhost ~ %</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从Docker Hub 拉取镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost ~ % docker pull redis</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载完成后，我们就可以在本地镜像列表里查到redis</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost ~ % docker image ls</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">redis               latest              de25a81a5a0b        6 days ago          98.2MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建redis集群的容器网络"><a href="#创建redis集群的容器网络" class="headerlink" title="创建redis集群的容器网络"></a>创建redis集群的容器网络</h2><p>我们为redis集群在创建一个容器网络由于集群用。这个网路起名为net2，子网是 172.19.0.0/16。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver=bridge --subnet=172.19.0.0/16 net2</span><br></pre></td></tr></table></figure>
+
+<p>创建成功后，执行docker network ls</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">ea330e03f971        bridge              bridge              local</span><br><span class="line">3ceb6ce41b7d        host                host                local</span><br><span class="line">b56e34603465        net2                bridge              local</span><br><span class="line">e403175c1fa1        none                null                local</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动6个redis服务器并创建redis集群"><a href="#启动6个redis服务器并创建redis集群" class="headerlink" title="启动6个redis服务器并创建redis集群"></a>启动6个redis服务器并创建redis集群</h2><ul>
+<li><p>回到redis.conf的模板文件的所在目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % ls</span><br><span class="line">redis.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行容器，绑定模板文件到容器的/etc/redis/redis.conf，绑定本地的5002端口到7000，分配IP 172.19.0.2 </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5002:7000 --net net2 --ip 172.19.0.2 redis:latest bash</span><br><span class="line">9119fb0bc6c64f4b435e0d642a916c4b52d8d23bd0a50d9e22942b1e86968813</span><br><span class="line">hzy@localhost 7000 % docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                              NAMES</span><br><span class="line">9119fb0bc6c6        redis:latest        &quot;docker-entrypoint.s…&quot;   4 seconds ago       Up 3 seconds        6379/tcp, 0.0.0.0:5002-&gt;7000/tcp   boring_tharp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>进入到容器，执行命令 docker exec ，在容器内命令行的方式，把redis启动起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % docker exec -it  9119fb0bc6c6  bash</span><br><span class="line">root@9119fb0bc6c6:/data#</span><br><span class="line">root@9119fb0bc6c6:/data#</span><br><span class="line">root@9119fb0bc6c6:/data#</span><br><span class="line">root@9119fb0bc6c6:/data# redis-server /etc/redis/redis.conf</span><br><span class="line">14:C 23 Oct 2019 14:54:20.626 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span><br><span class="line">14:C 23 Oct 2019 14:54:20.626 # Redis version=5.0.6, bits=64, commit=00000000, modified=0, pid=14, just started</span><br><span class="line">14:C 23 Oct 2019 14:54:20.626 # Configuration loaded</span><br><span class="line">root@9119fb0bc6c6:/data#</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同样的方式，启动剩余5个 docker容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5003:7000 --net net2 --ip 172.19.0.3 redis:latest bash</span><br><span class="line">604f1a0dd0c3ffc51c4e281121aff8c31942677b14ab81c32dff8b541e0691df</span><br><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5004:7000 --net net2 --ip 172.19.0.4 redis:latest bash</span><br><span class="line">b082f4dc583ff30373e1b46c0244f64795968d480b55cfcfa961647add794aea</span><br><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5005:7000 --net net2 --ip 172.19.0.5 redis:latest bash</span><br><span class="line">0c77f80821cfacd2af485e13fee7ab46174d9252546c9328b378448f3a2ad05c</span><br><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5006:7000 --net net2 --ip 172.19.0.6 redis:latest bash</span><br><span class="line">56f1c32d6f938280e6bd9c1179145c1da89881206ba262472222074b45e73b52</span><br><span class="line">hzy@localhost 7000 % docker run -it -d  -v $PWD/redis.conf:/etc/redis/redis.conf  -p 5007:7000 --net net2 --ip 172.19.0.7 redis:latest bash</span><br><span class="line">5b3996c528b7c09dd2ed57e93cbc5eef20fb9157a80a1530799182943e52116a</span><br><span class="line">hzy@localhost 7000 %</span><br><span class="line">hzy@localhost 7000 %</span><br><span class="line">hzy@localhost 7000 %</span><br><span class="line">hzy@localhost 7000 %</span><br><span class="line">hzy@localhost 7000 % docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                              NAMES</span><br><span class="line">5b3996c528b7        redis:latest        &quot;docker-entrypoint.s…&quot;   54 seconds ago       Up 52 seconds       6379/tcp, 0.0.0.0:5007-&gt;7000/tcp   dreamy_aryabhata</span><br><span class="line">56f1c32d6f93        redis:latest        &quot;docker-entrypoint.s…&quot;   About a minute ago   Up About a minute   6379/tcp, 0.0.0.0:5006-&gt;7000/tcp   silly_carson</span><br><span class="line">0c77f80821cf        redis:latest        &quot;docker-entrypoint.s…&quot;   About a minute ago   Up About a minute   6379/tcp, 0.0.0.0:5005-&gt;7000/tcp   xenodochial_hawking</span><br><span class="line">b082f4dc583f        redis:latest        &quot;docker-entrypoint.s…&quot;   About a minute ago   Up About a minute   6379/tcp, 0.0.0.0:5004-&gt;7000/tcp   naughty_goldwasser</span><br><span class="line">604f1a0dd0c3        redis:latest        &quot;docker-entrypoint.s…&quot;   About a minute ago   Up About a minute   6379/tcp, 0.0.0.0:5003-&gt;7000/tcp   gracious_nash</span><br><span class="line">9119fb0bc6c6        redis:latest        &quot;docker-entrypoint.s…&quot;   3 minutes ago        Up 3 minutes        6379/tcp, 0.0.0.0:5002-&gt;7000/tcp   boring_tharp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同样的方式，启动redis-server</p>
+</li>
+<li><p>进入到某一个容器，让创建建群,执行以下命令，如果看到输入日志，最终是 “[OK] All 16384 slots covered.” 就是成功了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create \</span><br><span class="line">172.19.0.2:7000 172.19.0.3:7000 \</span><br><span class="line">172.19.0.4:7000 172.19.0.5:7000 \</span><br><span class="line">172.19.0.6:7000 172.19.0.7:7000 \</span><br><span class="line">--cluster-replicas 1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="校验集群是否成功"><a href="#校验集群是否成功" class="headerlink" title="校验集群是否成功"></a>校验集群是否成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">hzy@localhost 7000 % docker exec -it 604f1a0dd0c3 bash</span><br><span class="line">root@604f1a0dd0c3:/data#</span><br><span class="line">root@604f1a0dd0c3:/data#</span><br><span class="line">root@604f1a0dd0c3:/data# redis-cli -c -p 7000</span><br><span class="line">127.0.0.1:7000&gt;</span><br><span class="line">127.0.0.1:7000&gt;</span><br><span class="line">127.0.0.1:7000&gt; get hello</span><br><span class="line">-&gt; Redirected to slot [866] located at 172.19.0.2:7000</span><br><span class="line">&quot;workd&quot;</span><br><span class="line">172.19.0.2:7000&gt;</span><br><span class="line">172.19.0.2:7000&gt;</span><br><span class="line">172.19.0.2:7000&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>根据本次实践，熟悉了redis的集群配置，同时熟悉的docker的简单操作。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/技术分享/" rel="tag"># 技术分享</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/11/Mysql联合索引最左匹配原则/" rel="next" title="Mysql联合索引最左匹配原则">
+                  <i class="fa fa-chevron-left"></i> Mysql联合索引最左匹配原则
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本地做Redis集群"><span class="nav-number">1.</span> <span class="nav-text">本地做Redis集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置redis文件"><span class="nav-number">1.1.</span> <span class="nav-text">配置redis文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动redis-server"><span class="nav-number">1.2.</span> <span class="nav-text">启动redis server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行redis-cli-创建集群"><span class="nav-number">1.3.</span> <span class="nav-text">执行redis-cli 创建集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行-redis-cli-c-p-来校验集群是否成功"><span class="nav-number">1.4.</span> <span class="nav-text">执行 redis-cli -c -p 来校验集群是否成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用docker做Redis集群"><span class="nav-number">2.</span> <span class="nav-text">使用docker做Redis集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用docker拉取最新的redis镜像"><span class="nav-number">2.1.</span> <span class="nav-text">使用docker拉取最新的redis镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建redis集群的容器网络"><span class="nav-number">2.2.</span> <span class="nav-text">创建redis集群的容器网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动6个redis服务器并创建redis集群"><span class="nav-number">2.3.</span> <span class="nav-text">启动6个redis服务器并创建redis集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#校验集群是否成功"><span class="nav-number">2.4.</span> <span class="nav-text">校验集群是否成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jimmy Wong</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jimmy Wong</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1e03a8c2c942a007aa2d',
+      clientSecret: 'c13db1d348fcbb2f0151ed1472c95119b9b34445',
+      repo: 'blog-comment',
+      owner: 'hzy2009',
+      admin: ['hzy2009'],
+      id: '02c683dcc5c42cd6b3fbd9860a972132',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>
