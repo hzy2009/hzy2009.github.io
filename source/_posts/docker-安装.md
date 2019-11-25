@@ -26,13 +26,13 @@ https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-reposi
 ### 卸载旧版本的docker
 ```
 [root@iZ2ze1mqd75ujzoxsvk29lZ ~]# sudo yum remove docker \
->                   docker-client \
->                   docker-client-latest \
->                   docker-common \
->                   docker-latest \
->                   docker-latest-logrotate \
->                   docker-logrotate \
->                   docker-engine
+                   docker-client \
+                   docker-client-latest \
+                   docker-common \
+                   docker-latest \
+                   docker-latest-logrotate \
+                   docker-logrotate \
+                   docker-engine
 已加载插件：fastestmirror
 参数 docker 没有匹配
 
@@ -51,8 +51,8 @@ https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-reposi
 
 ```
 [root@iZ2ze1mqd75ujzoxsvk29lZ ~]# yum install -y yum-utils \
->   device-mapper-persistent-data \
->   lvm2
+   device-mapper-persistent-data \
+   lvm2
 已加载插件：fastestmirror
 Determining fastest mirrors
 
@@ -76,8 +76,8 @@ Determining fastest mirrors
 
 ```
 [root@iZ2ze1mqd75ujzoxsvk29lZ ~]# yum-config-manager \
->     --add-repo \
->     https://download.docker.com/linux/centos/docker-ce.repo
+     --add-repo \
+     https://download.docker.com/linux/centos/docker-ce.repo
 已加载插件：fastestmirror
 adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
 grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
