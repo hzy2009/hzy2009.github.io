@@ -239,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -334,7 +334,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -423,7 +423,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -512,7 +512,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -598,7 +598,7 @@
                 
               
 
-              <time title="创建时间：2020-01-01 16:44:54 / 修改时间：09:00:21" itemprop="dateCreated datePublished" datetime="2020-01-01T16:44:54+00:00">2020-01-01</time>
+              <time title="创建时间：2020-01-01 16:44:54 / 修改时间：09:04:12" itemprop="dateCreated datePublished" datetime="2020-01-01T16:44:54+00:00">2020-01-01</time>
             </span>
           
             
@@ -618,14 +618,18 @@
 
       
           <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>windows</li>
+<li>windows10</li>
 <li>jdk8</li>
-</ul>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h2 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h2><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li>去掉配置文件上面的中文</li>
-<li>修改启动参数，制定执行编码</li>
-</ol>
-
+</ul><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="bootstrap-yml"><a href="#bootstrap-yml" class="headerlink" title="bootstrap.yml"></a>bootstrap.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line"> application:</span><br><span class="line">   name: devops-platform</span><br><span class="line"> cloud:</span><br><span class="line">   config:</span><br><span class="line">     enabled: false</span><br><span class="line">   consul:</span><br><span class="line">     host: $&#123;consul_host:**********&#125;</span><br><span class="line">     port: 8500 #$&#123;consul_port&#125;</span><br><span class="line">     enabled: true</span><br><span class="line">     config:</span><br><span class="line">       enabled: true #默认是true</span><br><span class="line">       format: YAML    # 表示consul上面文件的格式 有四种 YAML PROPERTIES KEY-VALUE FILES</span><br><span class="line">       data-key: devopsconfig #表示consul上面的KEY值(或者说文件的名字) 默认是data</span><br><span class="line">       acl-token: $&#123;consul_token:**********&#125;</span><br><span class="line">         #watch:</span><br><span class="line">       #enabled: true #实时刷新配置</span><br><span class="line">       #prefix: devops #设置配置值的基本文件夹</span><br><span class="line">       #default-context: #设置所有应用程序使用的文件夹名称</span><br><span class="line">       #profile-separator: #设置用于使用配置文件在属性源中分隔配置文件名称的分隔符的值</span><br><span class="line">     discovery:</span><br><span class="line">       enabled: true</span><br><span class="line">       register: true</span><br><span class="line">       serviceName: $&#123;spring.application.name&#125;</span><br><span class="line">       healthCheckPath: /actuator/health</span><br><span class="line">       healthCheckInterval: 15s</span><br><span class="line">       prefer-ip-address: true</span><br><span class="line">       tags: dev-/$&#123;spring.application.name&#125;</span><br><span class="line">       instanceId: $&#123;spring.application.name&#125;:$&#123;vcap.application.instance_id:$&#123;spring.application.instance_id:$&#123;spring.cloud.client.hostname&#125;:$&#123;server.port&#125;&#125;&#125;</span><br><span class="line">       acl-token: $&#123;consul_token:**********&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/01/springboot-consul-启动失败调错/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -689,7 +693,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -791,7 +795,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -880,7 +884,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -978,7 +982,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
@@ -1067,7 +1071,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 09:00:21" itemprop="dateModified" datetime="2020-01-01T09:00:21+00:00">2020-01-01</time>
+                <time title="修改时间：2020-01-01 09:04:12" itemprop="dateModified" datetime="2020-01-01T09:04:12+00:00">2020-01-01</time>
               </span>
             
           
