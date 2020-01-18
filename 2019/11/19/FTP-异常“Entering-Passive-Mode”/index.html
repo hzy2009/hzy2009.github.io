@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="今天面试的时候，和面试官谈到一个事务级别的问题，后来我自己查了资料，以及自己在Mysql上实践一下，得出一下结论。我操作的Mysql的版本是 MySQL5.6.36+InnoDB一、事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一">
+  <meta name="description" content="FTP连接时出现“227 Entering Passive Mode”解决办法也很简单，只需要关闭客户端的PASV方式，强制其用PORT方式访问服务器即可FTP服务的两种工作模式： port方式(主动模式)， 连接过程：客户端向服务器的FTP端口(默认是21)发送连接请求，服务器接受连接，建立一条命令链路。当需要传送数据时， 客户端在命令链路上用PORT命令告诉服务器：“我打开了X端口，你过来连接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql事务隔离级别">
-<meta property="og:url" content="http://yoursite.com/2019/10/11/Mysql事务隔离级别/index.html">
+<meta property="og:title" content="FTP 异常“Entering Passive Mode” ">
+<meta property="og:url" content="http://yoursite.com/2019/11/19/FTP-异常“Entering-Passive-Mode”/index.html">
 <meta property="og:site_name" content="志泳的博客-学习、分享、成长">
-<meta property="og:description" content="今天面试的时候，和面试官谈到一个事务级别的问题，后来我自己查了资料，以及自己在Mysql上实践一下，得出一下结论。我操作的Mysql的版本是 MySQL5.6.36+InnoDB一、事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一">
+<meta property="og:description" content="FTP连接时出现“227 Entering Passive Mode”解决办法也很简单，只需要关闭客户端的PASV方式，强制其用PORT方式访问服务器即可FTP服务的两种工作模式： port方式(主动模式)， 连接过程：客户端向服务器的FTP端口(默认是21)发送连接请求，服务器接受连接，建立一条命令链路。当需要传送数据时， 客户端在命令链路上用PORT命令告诉服务器：“我打开了X端口，你过来连接">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-18T02:08:11.139Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql事务隔离级别">
-<meta name="twitter:description" content="今天面试的时候，和面试官谈到一个事务级别的问题，后来我自己查了资料，以及自己在Mysql上实践一下，得出一下结论。我操作的Mysql的版本是 MySQL5.6.36+InnoDB一、事务的基本要素（ACID） 原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一">
-  <link rel="canonical" href="http://yoursite.com/2019/10/11/Mysql事务隔离级别/">
+<meta name="twitter:title" content="FTP 异常“Entering Passive Mode” ">
+<meta name="twitter:description" content="FTP连接时出现“227 Entering Passive Mode”解决办法也很简单，只需要关闭客户端的PASV方式，强制其用PORT方式访问服务器即可FTP服务的两种工作模式： port方式(主动模式)， 连接过程：客户端向服务器的FTP端口(默认是21)发送连接请求，服务器接受连接，建立一条命令链路。当需要传送数据时， 客户端在命令链路上用PORT命令告诉服务器：“我打开了X端口，你过来连接">
+  <link rel="canonical" href="http://yoursite.com/2019/11/19/FTP-异常“Entering-Passive-Mode”/">
 
 
 <script id="page-configurations">
@@ -80,7 +80,7 @@
   };
 </script>
 
-  <title>Mysql事务隔离级别 | 志泳的博客-学习、分享、成长</title>
+  <title>FTP 异常“Entering Passive Mode”  | 志泳的博客-学习、分享、成长</title>
   
 
 
@@ -204,7 +204,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/Mysql事务隔离级别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/FTP-异常“Entering-Passive-Mode”/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jimmy Wong">
@@ -216,7 +216,7 @@
       <meta itemprop="name" content="志泳的博客-学习、分享、成长">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Mysql事务隔离级别
+        <h1 class="post-title" itemprop="name headline">FTP 异常“Entering Passive Mode” 
 
           
         </h1>
@@ -232,7 +232,7 @@
                 
               
 
-              <time title="创建时间：2019-10-11 10:12:31" itemprop="dateCreated datePublished" datetime="2019-10-11T10:12:31+00:00">2019-10-11</time>
+              <time title="创建时间：2019-11-19 18:06:15" itemprop="dateCreated datePublished" datetime="2019-11-19T18:06:15+00:00">2019-11-19</time>
             </span>
           
             
@@ -259,78 +259,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>今天面试的时候，和面试官谈到一个事务级别的问题，后来我自己查了资料，以及自己在Mysql上实践一下，得出一下结论。我操作的Mysql的版本是 MySQL5.6.36+InnoDB</p><h2 id="一、事务的基本要素（ACID）"><a href="#一、事务的基本要素（ACID）" class="headerlink" title="一、事务的基本要素（ACID）"></a>一、事务的基本要素（ACID）</h2><ol>
-<li><p>原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。</p>
+        <p>FTP连接时出现“227 Entering Passive Mode”解决办法也很简单，只需要关闭客户端的PASV方式，强制其用PORT方式访问服务器即可</p><h2 id="FTP服务的两种工作模式："><a href="#FTP服务的两种工作模式：" class="headerlink" title="FTP服务的两种工作模式："></a>FTP服务的两种工作模式：</h2><ul>
+<li><p>port方式(主动模式)， 连接过程：客户端向服务器的FTP端口(默认是21)发送连接请求，服务器接受连接，建立一条命令链路。当需要传送数据时， 客户端在命令链路上用PORT命令告诉服务器：“我打开了<strong><em>X端口，你过来连接我”。于是服务器从20端口向客户端的</em></strong>X端口发送连接请求，建立一条数据链路来传送数据。</p>
 </li>
-<li><p>一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱，B却没收到。</p>
+<li><p>pasv方式 ( 被动模式 )， 连接过程：客户端向服务器的FTP端口(默认是21)发送连接请求，服务器接受连接，建立一条命令链路。当需要传送数据时， 服务器在命令链路上用PASV命令告诉客户端：“我打开了<strong><em>X端口，你过来连接我”。于是客户端向服务器的</em></strong>X端口发送连接请求，建立一条数据链 路来传送数据。</p>
 </li>
-<li><p>隔离性（Isolation）：同一时间，只允许一个事务请求同一数据，不同的事务之间彼此没有任何干扰。比如A正在从一张银行卡中取钱，在A取钱的过程结束前，B不能向这张卡转账。</p>
-</li>
-<li><p>持久性（Durability）：事务完成后，事务对数据库的所有更新将被保存到数据库，不能回滚。</p>
-</li>
-</ol><a id="more"></a>
+</ul><a id="more"></a>
 
-<h2 id="二、事务的并发问题"><a href="#二、事务的并发问题" class="headerlink" title="二、事务的并发问题"></a>二、事务的并发问题</h2><ol>
-<li><p>脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据</p>
-</li>
-<li><p>不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。</p>
-</li>
-<li><p>幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。</p>
-</li>
-</ol>
-<p>　　小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表</p>
-<p>三、MySQL事务隔离级别</p>
-<table>
-<thead>
-<tr>
-<th>事务隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>读未提交（read-uncommitted）</td>
-<td>是</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>不可重复读（read-committed）</td>
-<td>否</td>
-<td>是</td>
-<td>是</td>
-</tr>
-<tr>
-<td>可重复读（repeatable-read）</td>
-<td>否</td>
-<td>否</td>
-<td>是</td>
-</tr>
-<tr>
-<td>串行化（serializable）</td>
-<td>否</td>
-<td>否</td>
-<td>否</td>
-</tr>
-</tbody></table>
-<p>检查可重复读的时候，是否有幻读</p>
-<p>补充：</p>
-<ol>
-<li><p>事务隔离级别为读提交时，写数据只会锁住相应的行</p>
-</li>
-<li><p>事务隔离级别为可重复读时，如果检索条件有索引（包括主键索引）的时候，默认加锁方式是next-key 锁；如果检索条件没有索引，更新数据时会锁住整张表。一个间隙被事务加了锁，其他事务是不能在这个间隙插入记录的，这样可以防止幻读。</p>
-</li>
-<li><p>事务隔离级别为串行化时，读写数据都会锁住整张表</p>
-</li>
-<li><p>隔离级别越高，越能保证数据的完整性和一致性，但是对并发性能的影响也越大。</p>
-</li>
-<li><p>MYSQL MVCC实现机制参考链接：<a href="https://blog.csdn.net/whoamiyang/article/details/51901888" target="_blank" rel="noopener">https://blog.csdn.net/whoamiyang/article/details/51901888</a></p>
-</li>
-<li><p>关于next-key 锁可以参考链接：<a href="https://blog.csdn.net/bigtree_3721/article/details/73731377" target="_blank" rel="noopener">https://blog.csdn.net/bigtree_3721/article/details/73731377</a></p>
-</li>
-</ol>
+<p>由于服务器上的FTP进行TCP/IP筛选，仅允许特定的端口可以被客户端连接，所以无法使用PASV方式。找到了原因，解决办法也很简单，只需要关闭客户端的PASV方式，强制其用PORT方式访问服务器即可。</p>
+<p>客户端登录FTP服务器后，用passive命令关闭客户端的PASV方式，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp&gt; passive </span><br><span class="line">Passive mode off.</span><br></pre></td></tr></table></figure>
 
+<p>再次执行该命令就可以启用PASV模式。</p>
+<h3 id="修改配置文件解决问题"><a href="#修改配置文件解决问题" class="headerlink" title="修改配置文件解决问题"></a>修改配置文件解决问题</h3><ol>
+<li>修改vsftpd.conf文件，添加: &lt;以被动模式启动，开放被动的访问端口&gt;</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pasv_min_port=30000</span><br><span class="line">pasv_max_port=30999</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>然后定义iptables规则：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables –A INPUT –p tcp ——dport 30000:30999 –j ACCEPT</span><br><span class="line">iptables –A INPUT –p tcp ——dport 30000:30999 –j ACCEPT</span><br><span class="line">iptables –A INPUT –p tcp ——dport 21 –j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将vsftpd的模式修改为主动模式：&lt;以主动模式起动&gt;  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pasv_enable=no</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -346,8 +300,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/10/决定协同软件成败的关键因素/" rel="next" title="决定协同软件成败的关键因素">
-                  <i class="fa fa-chevron-left"></i> 决定协同软件成败的关键因素
+                <a href="/2019/11/14/docker-安装/" rel="next" title="docker 安装">
+                  <i class="fa fa-chevron-left"></i> docker 安装
                 </a>
               
             </div>
@@ -356,8 +310,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/10/11/Mysql联合索引最左匹配原则/" rel="prev" title="Mysql联合索引最左匹配原则">
-                  Mysql联合索引最左匹配原则 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/01/01/springboot-consul-启动失败调错/" rel="prev" title="springboot consul 启动失败调错">
+                  springboot consul 启动失败调错 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -410,7 +364,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、事务的基本要素（ACID）"><span class="nav-number">1.</span> <span class="nav-text">一、事务的基本要素（ACID）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、事务的并发问题"><span class="nav-number">2.</span> <span class="nav-text">二、事务的并发问题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FTP服务的两种工作模式："><span class="nav-number">1.</span> <span class="nav-text">FTP服务的两种工作模式：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改配置文件解决问题"><span class="nav-number">1.1.</span> <span class="nav-text">修改配置文件解决问题</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -534,7 +488,7 @@
       repo: 'blog-comment',
       owner: 'hzy2009',
       admin: ['hzy2009'],
-      id: '5cd0b1e65dd6b0844a8d759e5b703ddc',
+      id: 'ea3a543158e1592429bbbd0d3dd2af5b',
         language: 'zh-CN',
       
       distractionFreeMode: 'true'
